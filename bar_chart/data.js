@@ -12,7 +12,7 @@ var data = [
     "Margarine": 0.03603604,
     "Beurre": 0.00900901,
     "autre": 0.03603604,
-    "age18_age19":0.01,
+    "age18_age19":0.1,
     "age20_age29":0.16363636,
     "age30_age39":0.06363636,
     "ageS40":0.01818182
@@ -90,7 +90,7 @@ var data = [
     "ageS40":0
   },
   {
-    "Maladies": "Pas malade",
+    "Maladies": "Aucune Maladie",
     "Fumeur": 0.02727273,
     "Nonfumeur": 0.25454545,
     "Pasdactivityphysique": 0.06363636,

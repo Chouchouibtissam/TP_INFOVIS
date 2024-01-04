@@ -20,10 +20,10 @@ const width = 1200
 const margin = {top : 50 , right : 50 , bottom : 50 , left : 50}
 
 var svg = d3.select("#chart_container").append("svg")
-                                  .attr("width", width -50 )
-                                  .attr("height", height)
-                                  .attr("viewBox", [0, 0, width, height])      
-                                  .attr("class" , "chart");
+                                       .attr("width", width -50 )
+                                       .attr("height", height)
+                                       .attr("viewBox", [0, 0, width, height])      
+                                       .attr("class" , "chart");
 
 var x = d3.scaleBand().domain(d3.range(data.length)).rangeRound([margin.left, width - margin.right]).paddingInner(0.3).paddingOuter(0.2),
 y = d3.scaleLinear().domain([0,60]).rangeRound([height, 80]);
@@ -58,7 +58,7 @@ fumeur.on("mouseover", function(d , i) {
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
-  div	.html("Fumeurs pour " + i.Maladies + "<br/>"  + (i.Fumeur)*100 + "%")	
+  div	.html("Fumeurs pour " + i.Maladies + "<br/>"  + (i.Fumeur * 100).toFixed(2) + "%")	
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					
@@ -88,7 +88,7 @@ non_fumeur .on("mouseover", function(d , i) {
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
-  div	.html("Nonfumeurs pour " + i.Maladies + "<br/>"  + (i.Nonfumeur)*100 + "%")	
+  div	.html("Non Fumeurs pour " + i.Maladies + "<br/>"  + (i.Nonfumeur * 100).toFixed(2)+ "%")	
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					
@@ -118,7 +118,7 @@ p_femme.on("mouseover", function(d , i) {
  div.transition()		
      .duration(200)		
      .style("opacity", .9);		
- div	.html("Les femmes pour " + i.Maladies + "<br/>"  + (i.femme)*100 + "%")	
+ div	.html("Les femmes pour " + i.Maladies + "<br/>"  + (i.femme * 100).toFixed(2) + "%")	
      .style("left", (d.pageX + 20) + "px")		
      .style("top", (d.pageY - 28) + "px");	
  })					
@@ -150,7 +150,7 @@ p_homme.on("mouseover", function(d , i) {
  div.transition()		
      .duration(200)		
      .style("opacity", .9);		
- div	.html("Les homme pour " + i.Maladies + "<br/>"  + (i.homme)*100 + "%")	
+ div	.html("Les hommes pour " + i.Maladies + "<br/>"  + (i.homme * 100).toFixed(2) + "%")	
      .style("left", (d.pageX + 20) + "px")		
      .style("top", (d.pageY - 28) + "px");	
  })					
@@ -184,7 +184,7 @@ age_1.on("mouseover", function(d , i) {
  div.transition()		
      .duration(200)		
      .style("opacity", .9);		
- div	.html("Autre végétable pour " + i.Maladies + "<br/>"  + (i.age18_age19)*100 + "%")	
+ div	.html("Age entre 18 et 20ans pour " + i.Maladies + "<br/>"  + (i.age18_age19 * 100).toFixed(2) + "%")	
      .style("left", (d.pageX + 20) + "px")		
      .style("top", (d.pageY - 28) + "px");	
  })					
@@ -215,7 +215,7 @@ age_2.on("mouseover", function(d , i) {
  div.transition()		
      .duration(200)		
      .style("opacity", .9);		
- div	.html("Beurre pour " + i.Maladies + "<br/>"  + (i.age20_age29)*100 + "%")	
+ div	.html("Age entre 20 et 29ans pour " + i.Maladies + "<br/>"  + (i.age20_age29 * 100).toFixed(2) + "%")	
      .style("left", (d.pageX + 20) + "px")		
      .style("top", (d.pageY - 28) + "px");	
  })					
@@ -245,7 +245,7 @@ age_3.on("mouseover", function(d , i) {
  div.transition()		
      .duration(200)		
      .style("opacity", .9);		
- div	.html("Margarine pour " + i.Maladies + "<br/>"  + (i.age30_age39)*100 + "%")	
+ div	.html("Age entre 30 et 39ans pour " + i.Maladies + "<br/>"  + (i.age30_age39 * 100).toFixed(2) + "%")	
      .style("left", (d.pageX + 20) + "px")		
      .style("top", (d.pageY - 28) + "px");	
  })					
@@ -274,7 +274,7 @@ age_4.on("mouseover", function(d , i) {
  div.transition()		
      .duration(200)		
      .style("opacity", .9);		
- div	.html("Zit Zitoun pour " + i.Maladies + "<br/>"  + (i.ageS40)*100 + "%")	
+ div	.html("Age >40 pour " + i.Maladies + "<br/>"  + (i.ageS40 * 100).toFixed(2) + "%")	
      .style("left", (d.pageX + 20) + "px")		
      .style("top", (d.pageY - 28) + "px");	
  })					
@@ -307,7 +307,7 @@ s_plus.on("mouseover", function(d , i) {
 div.transition()		
   .duration(200)		
   .style("opacity", .9);		
-div	.html("Fitness +10min pour " + i.Maladies + "<br/>"  + (i.SPlus10)*100 + "%")	
+div	.html("Activité physique +10min pour " + i.Maladies + "<br/>"  + (i.SPlus10 * 100).toFixed(2)+ "%")	
   .style("left", (d.pageX + 20) + "px")		
   .style("top", (d.pageY - 28) + "px");	
 })					
@@ -337,7 +337,7 @@ pas_activity .on("mouseover", function(d , i) {
 div.transition()		
   .duration(200)		
   .style("opacity", .9);		
-div	.html("Pasdactivityphysique pour " + i.Maladies + "<br/>"  + (i.Pasdactivityphysique)*100 + "%")	
+div	.html("Pas d'activité physique pour " + i.Maladies + "<br/>"  + (i.Pasdactivityphysique * 100).toFixed(2)+ "%")	
   .style("left", (d.pageX + 20) + "px")		
   .style("top", (d.pageY - 28) + "px");	
 })					
@@ -370,7 +370,7 @@ autre_v.on("mouseover", function(d , i) {
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
-  div	.html("Autre végétable pour " + i.Maladies + "<br/>"  + (i.autre)*100 + "%")	
+  div	.html("Autre pour " + i.Maladies + "<br/>"  + (i.autre * 100).toFixed(2)  + "%")	
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					
@@ -401,7 +401,7 @@ beurre_v.on("mouseover", function(d , i) {
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
-  div	.html("Beurre pour " + i.Maladies + "<br/>"  + (i.Beurre)*100 + "%")	
+  div	.html("Beurre pour " + i.Maladies + "<br/>"  + (i.Beurre * 100).toFixed(2) + "%")	
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					
@@ -431,7 +431,7 @@ marg .on("mouseover", function(d , i) {
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
-  div	.html("Margarine pour " + i.Maladies + "<br/>"  + (i.Margarine)*100 + "%")	
+  div	.html("Margarine pour " + i.Maladies + "<br/>"  + (i.Margarine * 100).toFixed(2) + "%")	
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					
@@ -460,7 +460,7 @@ zit.on("mouseover", function(d , i) {
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
-  div	.html("Zit Zitoun pour " + i.Maladies + "<br/>"  + (i.Zitziton)*100 + "%")	
+  div	.html("Zit Zitoun pour " + i.Maladies + "<br/>"  + (i.Zitziton * 100).toFixed(2) + "%")	
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					
@@ -488,7 +488,7 @@ huile.on("mouseover", function(d , i) {
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
-  div	.html("Huile végétale pour " + i.Maladies + "<br/>"  + (i.Huileveg)*100 + "%")	
+  div	.html("Huile végétale pour " + i.Maladies + "<br/>"  + (i.Huileveg * 100).toFixed(2) + "%")	
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					

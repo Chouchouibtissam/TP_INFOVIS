@@ -38,7 +38,7 @@
     {
       "name": "Age",
       "children": [
-       {"name": "age18_age19", "value": 0.01},
+       {"name": "age18_age19", "value": 0.1},
        {"name": "age20_age29", "value": 0.16363636},
        {"name": "age30_age39", "value": 0.06363636},
        {"name": "ageS40", "value": 0.01818182}
@@ -227,7 +227,7 @@
    ]
   },
   {
-   "name": "Pas de malade",
+   "name": "Aucune Maladie",
    "children": [
     {
      "name": "Fumeur",
