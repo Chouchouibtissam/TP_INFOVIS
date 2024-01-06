@@ -3,17 +3,17 @@ var colors = {
   "Nonfumeur": "#6a51a3",
   "homme": "#dd3497",
   "femme": "#f768a1",
-  "age18_age19":"#f16913",
-  "age20_age29":"#fd8d3c",
-  "age30_age39":"#fdae6b ",
-  "ageS40":"#fdd0a2",
+  "age18_age19":"#6baed6",
+  "age20_age29":"#4292c6",
+  "age30_age39":"#2171b5 ",
+  "ageS40":"#084594",
   "Pasdactivityphysique": "#7fcdbb",
   "SPlus10": "#c7e9b4",
-  "Huileveg": "#084594",
-  "Zitziton": "#2171b5",
-  "Margarine": "#4292c6",
-  "Beurre": '#6baed6',
-  "autre": "#9ecae1"
+  "Huileveg": "#d94801",
+  "Zitziton": "#f16913",
+  "Margarine": "#fd8d3c",
+  "Beurre": '#fdae6b',
+  "autre": "#fdd0a2"
 }
 
 const height = 500
