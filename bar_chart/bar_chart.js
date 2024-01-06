@@ -133,7 +133,7 @@ p_femme.on("mouseover", function(d , i) {
  div.transition()		
      .duration(200)		
      .style("opacity", .9);		
- div	.html("Les femmes pour " + i.Maladies + "<br/>"  + (i.femme * 100).toFixed(2) + "%")	
+ div	.html("Pourcentage des femmes pour " + i.Maladies + "<br/>"  + (i.femme * 100).toFixed(2) + "%")	
      .style("left", (d.pageX + 20) + "px")		
      .style("top", (d.pageY - 28) + "px");	
  })					
@@ -165,7 +165,7 @@ p_homme.on("mouseover", function(d , i) {
  div.transition()		
      .duration(200)		
      .style("opacity", .9);		
- div.html("Les hommes pour " + i.Maladies + "<br/>"  + (i.homme * 100).toFixed(2) + "%")	
+ div.html("Pourcentage d'hommes pour " + i.Maladies + "<br/>"  + (i.homme * 100).toFixed(2) + "%")	
      .style("left", (d.pageX + 20) + "px")		
      .style("top", (d.pageY - 28) + "px");	
  })					
