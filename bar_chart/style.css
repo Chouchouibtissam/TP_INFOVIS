@@ -27,3 +27,11 @@ div.tooltip {
     align-items: center;
     justify-content: center;	
 }
+
+.option-button {
+    background-color: rgb(0, 90, 170);
+    border: 1px solid rgb(138, 196, 247);
+    padding: 4px 20px;
+    color: white;
+    font-weight: 600;
+}

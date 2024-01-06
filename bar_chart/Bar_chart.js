@@ -1,25 +1,29 @@
-var colors ={"Fumeur": "#807dba",
-"Nonfumeur": "#6a51a3",
-"homme": "#dd3497",
-"femme": "#f768a1",
-"age18_age19":"#f16913",
-"age20_age29":"#fd8d3c",
-"age30_age39":"#fdae6b ",
-"ageS40":"#fdd0a2",
-"Pasdactivityphysique": "#7fcdbb",
-"SPlus10": "#c7e9b4",
-"Huileveg": "#084594",
-"Zitziton": "#2171b5",
-"Margarine": "#4292c6",
-"Beurre": '#6baed6',
-"autre": "#9ecae1"
+var colors = {
+  "Fumeur": "#807dba",
+  "Nonfumeur": "#6a51a3",
+  "homme": "#dd3497",
+  "femme": "#f768a1",
+  "age18_age19":"#f16913",
+  "age20_age29":"#fd8d3c",
+  "age30_age39":"#fdae6b ",
+  "ageS40":"#fdd0a2",
+  "Pasdactivityphysique": "#7fcdbb",
+  "SPlus10": "#c7e9b4",
+  "Huileveg": "#084594",
+  "Zitziton": "#2171b5",
+  "Margarine": "#4292c6",
+  "Beurre": '#6baed6',
+  "autre": "#9ecae1"
 }
 
 const height = 500
 const width = 1200
 const margin = {top : 50 , right : 50 , bottom : 50 , left : 50}
 
-function zoom(svg) {
+var x = d3.scaleBand().domain(d3.range(data.length)).rangeRound([margin.left, width - margin.right]).paddingInner(0.3).paddingOuter(0.2)
+var y = d3.scaleLinear().domain([0,60]).rangeRound([height, 80]);
+
+function zoom_x(svg) {
   const extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];
 
   svg.call(d3.zoom()
@@ -50,15 +54,32 @@ function zoom(svg) {
   }
 }
 
+function zoom_y(svg){
+  const extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];
+
+  svg.call(d3.zoom()
+      .scaleExtent([1, 14])
+      .translateExtent(extent)
+      .extent(extent)
+      .on("zoom", zoomed));
+  
+  function zoomed(event){
+    y.range([height - margin.bottom, margin.top].map(d => event.transform.applyY(d)));
+
+    // svg.selectAll(".bars rect")
+    //   .attr("y", d => y(d.y))
+    //   .attr("height", d => height - margin.bottom - y(d.y));
+
+    svg.selectAll(".y-axis").call(yAxis);
+  }
+}
+
 var svg = d3.select("#chart_container").append("svg")
                                        .attr("width", width -50 )
                                        .attr("height", height)
                                        .attr("viewBox", [0, 0, width, height])      
                                        .attr("class" , "chart")
-                                       .call(zoom);
-
-var x = d3.scaleBand().domain(d3.range(data.length)).rangeRound([margin.left, width - margin.right]).paddingInner(0.3).paddingOuter(0.2),
-y = d3.scaleLinear().domain([0,60]).rangeRound([height, 80]);
+                                       .call(zoom_x);
                                   
 function xAxis(g){
   g.attr('transform', `translate(0 , ${height -50})`).call(d3.axisBottom(x).tickFormat(i => data[i].Maladies))
@@ -165,7 +186,7 @@ p_femme.on("mouseover", function(d , i) {
 
 
 
-var p_homme  =svg.append('g')
+var p_homme = svg.append('g')
                 .attr('fill' , colors.homme)
                 .attr("class", "bars2-2")
                 .selectAll('rect')
@@ -515,7 +536,8 @@ var huile =svg.append('g')
               .attr('height' , 0)
               .attr('width', x.bandwidth()/4)
     
-huile.on("mouseover", function(d , i) {		
+huile.on("mouseover", function(d , i) {
+  console.log(d)	
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
@@ -540,15 +562,15 @@ huile.on("mouseover", function(d , i) {
    
 
 svg.append('g').attr("class", "axis").attr("class", "x-axis").call(xAxis)
-svg.append('g').attr("class", "axis").call(yAxis)
-var text3= svg.append("text")
+svg.append('g').attr("class", "axis").attr("class", "y-axis").call(yAxis)
+var text3 = svg.append("text")
               .style("fill", "black")
               .style("font-size", "23px")
               .attr("text-anchor", "end")
               .attr("transform", `translate(${width - 20},${height}) rotate(0)`)
               .text("Maladies");
 
-var text3= svg.append("text")
+var text3 = svg.append("text")
               .style("fill", "black")
               .style("font-size", "23px")
               .attr("text-anchor", "end")

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<html>
+<title>TP Infovis</title>
+
+<head>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script src="./jquery-3.5.0.js"></script>
+  <link rel="stylesheet" href="https://x3dom.org/release/x3dom.css" />
+  <link rel="stylesheet" href="./bar_chart/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+
+<body>
+  <div
+    style="margin: 0; position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: end; justify-content: center;">
+    <div id="navbar"
+      style="height: 20%; width: 100%; display: flex; align-items: center; justify-content: center; background-color: rgb(138, 196, 247); flex-direction: column; box-shadow: 0 0 12px 2px rgb(172, 172, 172);">
+      <h1>Diagramme de bars</h1>
+      <ul style="list-style-type: none; margin-top: 20px;">
+        <li style="display: inline; padding: 20px;"><a style="color: rgb(0, 0, 171);"href="./index.html">Diagramme de Bars</a></li>
+        <li style="display: inline; padding: 20px;"><a style="color: rgb(0, 0, 171);"href="./Pie_chart/index.html">Diagramme Circulaire</a></li>
+      </ul>
+    </div>
+   <div
+      style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;  background-color: rgb(255, 255, 255); flex-direction: row; box-shadow: 0 0 12px 2px rgb(172, 172, 172);">
+      <div style="display: flex; flex-direction: row;">
+        <div id="chart_container" style="max-height:100% ; max-width: 100%; padding-left: 10px; margin: 0px;"></div>
+        <div class="flex-container" style="display: flex; flex-direction: column; max-width: 100%; max-height: 100%; background-color: rgb(138, 196, 247); border-top-right-radius: 20px; border-bottom-right-radius: 20px;">
+          <div style="flex: 0 1 auto; display: flex; flex-direction: row; justify-content: center; align-items: center;">
+            <button id="legend-button" class="option-button" style="width: 100%;" onclick="switchToLegend()">Légende</button>
+            <button id="interactions-button" class="option-button" style="width: 100%;" onclick="switchToInteractions()">Intéractions</button>
+          </div>
+          <div id="legend" class="row" style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; font-size: small; padding: 0px 10px;">
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #807dba;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> Fumeur
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #6a51a3;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> Non fumeur
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #dd3497;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> Homme 
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #f768a1;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> Femme 
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #f16913;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> 18-19 ans
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #fd8d3c;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> 20-29 ans
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #fdae6b;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> 30-39 ans
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #fdd0a2;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> Plus de 40 ans
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #7fcdbb;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> Pas d'activité physique 
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #c7e9b4;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> Activité physique +10 mins 
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #084594;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> Huile Végétale 
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #2171b5;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> Zit ziton
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #4292c6;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> Margarine 
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #6baed6;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div> Beurre 
+              </div>
+              <div style="display: flex ;flex-direction: row;">
+                <div
+                  style="height: 24px; width: 24px ; background-color: #9ecae1;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+                </div>  Autre 
+              </div>
+          </div>
+          <div id="interactions" style="padding: 10px 10px;">
+            <div>
+              <p style="margin: 0; font-weight: bold; margin-bottom: 4px;">Filtrage</p>
+              <div>
+                <input type="checkbox" id="fumer" name="fumer" checked="true">
+                <label for="fumer"> Fumer </label><br>
+                <input type="checkbox" id="activite_physique" name="activite_physique" checked="true">
+                <label for="activite_physique"> Activité Physique </label><br>
+                <input type="checkbox" id="sexe" name="sexe" checked="true">
+                <label for="sexe"> Sexe </label><br>
+                <input type="checkbox" id="huile" name="huile" checked="true">
+                <label for="huile"> Huile </label><br>
+                <input type="checkbox" id="age" name="age" checked="true">
+                <label for="age"> Age </label><br>
+              </div>
+              <p style="margin: 0; font-weight: bold; margin-top: 8px;">Zoom</p>
+              <p style="margin: 0; max-width: 200px; font-size: 14px;">(Vous pouvez zoomer grâce à la souris ou avec les options suivantes)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+  <script>
+
+    const legend_div = document.querySelector("#legend");
+    const interactions_div = document.querySelector("#interactions");
+
+    const legend_button = document.querySelector("#legend-button");
+    const interactions_button = document.querySelector("#interactions-button");
+
+    function switchToLegend(){
+      legend_div.style.display = "flex";
+      legend_button.style["background-color"] = "rgb(138, 196, 247)"
+      interactions_div.style.display = "none"
+      interactions_button.style["background-color"] = "rgb(0, 90, 170)"
+    }
+
+    function switchToInteractions(){
+      interactions_div.style.display = "block";
+      interactions_button.style["background-color"] = "rgb(138, 196, 247)"
+      legend_div.style.display = "none"
+      legend_button.style["background-color"] = "rgb(0, 90, 170)"
+    }
+
+    // Initialisation
+    switchToLegend()
+  </script>
+  <script src="./bar_chart/data.js"></script>
+  <script src="./bar_chart/Bar_chart.js"></script>
+</body>
+
+</html>
