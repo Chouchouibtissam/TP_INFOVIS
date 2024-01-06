@@ -730,7 +730,7 @@ function applyZoomXMinus(factor=0.6){
 
 function applyZoomYPlus(factor=1.2){
   // ============= Bars ==============
-  d3.selectAll(".gen_bars rect").transition().duration(200).attr("height", (d, i, nodes) => {
+  d3.selectAll(".gen_bars rect").transition().duration(100).attr("height", (d, i, nodes) => {
     const currentHeight = parseFloat(d3.select(nodes[i]).attr('height'));
     return currentHeight * factor;
   }).attr('y', (d, i, nodes) => {
@@ -743,11 +743,11 @@ function applyZoomYPlus(factor=1.2){
   // ============= Y Axis ===========
   y_domain = y.domain();
   y = d3.scaleLinear([0, y_domain[y_domain.length - 1] / factor],[height, 80]);
-  d3.select(".y-axis").transition().duration(200).call(yAxis)
+  d3.select(".y-axis").transition().duration(100).call(yAxis)
 }
 
 function applyZoomYMinus(factor=0.8){
-  d3.selectAll(".gen_bars rect").transition().duration(200).attr("height", (d, i, nodes) => {
+  d3.selectAll(".gen_bars rect").transition().duration(100).attr("height", (d, i, nodes) => {
     const currentHeight = parseFloat(d3.select(nodes[i]).attr('height'));
     return currentHeight * factor;
   }).attr('y', (d, i, nodes) => {
@@ -760,7 +760,7 @@ function applyZoomYMinus(factor=0.8){
   // ============= Y Axis ===========
   y_domain = y.domain();
   y = d3.scaleLinear([0, y_domain[y_domain.length - 1] / factor],[height, 80]);
-  d3.select(".y-axis").transition().duration(200).call(yAxis)
+  d3.select(".y-axis").transition().duration(100).call(yAxis)
 }
 
 svg.node()
