@@ -65,7 +65,7 @@ var fumeur = svg.append('g')
               .data(data)
               .join('rect')
               .attr('x', (d ,i) => x(i))
-              .attr('y', (d) => (y(0) -50) )
+              .attr('y', (d) => (y(0) - margin.bottom) )
               .attr('height' , 0)
               .attr('width', x.bandwidth()/vars_count)
    
@@ -84,7 +84,7 @@ fumeur.on("mouseover", function(d , i) {
       .style("opacity", 0);	
 }) 
 .transition()
-.attr('y', (d) => (y(d.Fumeur*100) -50 - (y(0) - y(d.Nonfumeur*100))) )
+.attr('y', (d) => (y(d.Fumeur*100) - margin.bottom - (y(0) - y(d.Nonfumeur*100))) )
 .attr('height' , (d) => y(0) - y(d.Fumeur*100) );
 
 
@@ -96,8 +96,7 @@ var non_fumeur =svg.append('g')
   .data(data)
   .join('rect')
     .attr('x', (d ,i) => x(i))
-    .attr('y', (d) => (y(0) -50) )
-    
+    .attr('y', (d) => (y(0) - margin.bottom) )
     .attr('height' , 0)
     .attr('width', x.bandwidth()/vars_count)
 non_fumeur .on("mouseover", function(d , i) {		
@@ -114,7 +113,7 @@ non_fumeur .on("mouseover", function(d , i) {
       .style("opacity", 0);	
 })
 .transition()
-.attr('y', (d) => (y(d.Nonfumeur*100) -50) )
+.attr('y', (d) => (y(d.Nonfumeur*100) - margin.bottom) )
     .attr('height' , (d) => y(0) - y(d.Nonfumeur*100));
 
 
@@ -127,7 +126,7 @@ non_fumeur .on("mouseover", function(d , i) {
                   .data(data)
                   .join('rect')
                   .attr('x', (d ,i) => x(i)+x.bandwidth()/vars_count)
-                  .attr('y', (d) => (y(0) -50 ) )
+                  .attr('y', (d) => (y(0) - margin.bottom) )
                   .attr('height' , 0)
                   .attr('width', x.bandwidth()/vars_count)
 p_femme.on("mouseover", function(d , i) {		
@@ -144,7 +143,7 @@ p_femme.on("mouseover", function(d , i) {
      .style("opacity", 0);	
 })
 .transition()
-.attr('y', (d) => (y(d.femme*100) -50 - (y(0) - y(d.homme*100))) )
+.attr('y', (d) => (y(d.femme*100) - margin.bottom - (y(0) - y(d.homme*100))) )
    .attr('height' , (d) => y(0) - y(d.femme*100) );
 
 
@@ -156,7 +155,7 @@ var p_homme = svg.append('g')
                 .data(data)
                 .join('rect')
                 .attr('x', (d ,i) => x(i)+x.bandwidth()/vars_count)
-                .attr('y', (d) => (y(0) -50) )
+                .attr('y', (d) => (y(0) - margin.bottom) )
                 .attr('height' , 0)
                 .attr('width', x.bandwidth()/vars_count)
                 
@@ -176,7 +175,7 @@ p_homme.on("mouseover", function(d , i) {
      .style("opacity", 0);	
 })
 .transition()
-.attr('y', (d) => (y(d.homme*100) -50) )
+.attr('y', (d) => (y(d.homme*100) - margin.bottom) )
    .attr('height' , (d) => y(0) - y(d.homme*100));
 
 
@@ -193,7 +192,7 @@ p_homme.on("mouseover", function(d , i) {
                 .data(data)
                 .join('rect')
                 .attr('x', (d ,i) => x(i)+2*x.bandwidth()/vars_count)
-                .attr('y', (d) => (y(0) -50 ) )
+                .attr('y', (d) => (y(0) - margin.bottom) )
                 .attr('height' , 0)
                 .attr('width', x.bandwidth()/vars_count)
 age_1.on("mouseover", function(d , i) {		
@@ -210,7 +209,7 @@ age_1.on("mouseover", function(d , i) {
      .style("opacity", 0);	
 })
 .transition()
- .attr('y', (d) => (y(d.age18_age19*100) -50 - (y(0) - y(d.age20_age29*100))- (y(0) - y(d.age30_age39*100))- (y(0) - y(d. ageS40*100))) )
+ .attr('y', (d) => (y(d.age18_age19*100) - margin.bottom - (y(0) - y(d.age20_age29*100))- (y(0) - y(d.age30_age39*100))- (y(0) - y(d. ageS40*100))) )
  .attr('height' , (d) => y(0) - y(d.age18_age19*100) );
 
 
@@ -222,7 +221,7 @@ var age_2 = svg.append('g')
               .data(data)
               .join('rect')
               .attr('x', (d ,i) => x(i)+2*x.bandwidth()/vars_count)
-              .attr('y', (d) => (y(0) -50) )
+              .attr('y', (d) => (y(0) - margin.bottom) )
               .attr('height' , 0)
               .attr('width', x.bandwidth()/vars_count)
    
@@ -241,7 +240,7 @@ age_2.on("mouseover", function(d , i) {
      .style("opacity", 0);	
 })
 .transition()
-.attr('y', (d) => (y(d.age20_age29*100) -50 - (y(0) - y(d.age30_age39*100)) - (y(0) - y(d.ageS40*100))) )
+.attr('y', (d) => (y(d.age20_age29*100) - margin.bottom - (y(0) - y(d.age30_age39*100)) - (y(0) - y(d.ageS40*100))) )
    .attr('height' , (d) => y(0) - y(d.age20_age29*100));
 
 
@@ -252,7 +251,7 @@ var age_3 = svg.append('g')
                .data(data)
                .join('rect')
               .attr('x', (d ,i) => x(i)+2*x.bandwidth()/vars_count)
-              .attr('y', (d) => (y(0) -50) )
+              .attr('y', (d) => (y(0) - margin.bottom) )
               .attr('height' , 0)
               .attr('width', x.bandwidth()/vars_count)
    
@@ -271,7 +270,7 @@ age_3.on("mouseover", function(d , i) {
      .style("opacity", 0);	
 })
 .transition()
-.attr('y', (d) => (y(d.age30_age39*100) -50 - (y(0) - y(d.ageS40*100))) )
+.attr('y', (d) => (y(d.age30_age39*100) - margin.bottom - (y(0) - y(d.ageS40*100))) )
    .attr('height' , (d) => y(0) - y(d.age30_age39*100));
 
 
@@ -282,7 +281,7 @@ var age_4 = svg.append('g')
               .data(data)
               .join('rect')
               .attr('x', (d ,i) => x(i)+2*x.bandwidth()/vars_count)
-              .attr('y', (d) => (y(0) -50 ) )
+              .attr('y', (d) => (y(0) - margin.bottom) )
               .attr('height' , 0 )
               .attr('width', x.bandwidth()/vars_count)
 
@@ -300,7 +299,7 @@ age_4.on("mouseover", function(d , i) {
      .style("opacity", 0);	
 })
 .transition()
-.attr('y', (d) => (y(d.ageS40*100) -50) )
+.attr('y', (d) => (y(d.ageS40*100) - margin.bottom) )
    .attr('height' , (d) => y(0) - y(d.ageS40*100) );
 
 
@@ -315,7 +314,7 @@ var s_plus = svg.append('g')
                 .data(data)
                 .join('rect')
                 .attr('x', (d ,i) => x(i)+3*x.bandwidth()/vars_count)
-                .attr('y', (d) => (y(0) -50 ) )
+                .attr('y', (d) => (y(0) - margin.bottom) )
                 .attr('height' , 0 )
                 .attr('width', x.bandwidth()/vars_count)
   
@@ -333,7 +332,7 @@ div.transition()
   .style("opacity", 0);	
 })
 .transition()
-.attr('y', (d) => (y(d.SPlus10*100) -50 - ((y(0) - y(d.Pasdactivityphysique*100)))) )
+.attr('y', (d) => (y(d.SPlus10*100) - margin.bottom - ((y(0) - y(d.Pasdactivityphysique*100)))) )
 .attr('height' , (d) => y(0) - y(d.SPlus10*100) );
 
 
@@ -345,7 +344,7 @@ var pas_activity = svg.append('g')
                       .data(data)
                       .join('rect')
                       .attr('x', (d ,i) => x(i)+3*x.bandwidth()/vars_count)
-                      .attr('y', (d) => (y(0) -50 )) 
+                      .attr('y', (d) => (y(0) - margin.bottom)) 
                       .attr('height' , 0 )
                       .attr('width', x.bandwidth()/vars_count)
 pas_activity .on("mouseover", function(d , i) {		
@@ -362,7 +361,7 @@ div.transition()
   .style("opacity", 0);	
 })
 .transition()
-.attr('y', (d) => (y(d.Pasdactivityphysique*100) -50 )) 
+.attr('y', (d) => (y(d.Pasdactivityphysique*100) - margin.bottom)) 
   .attr('height' , (d) => y(0) - y(d.Pasdactivityphysique*100) ); 
 
 
@@ -378,7 +377,7 @@ var autre_v = svg.append('g')
                 .data(data)
                 .join('rect')
                 .attr('x', (d ,i) => x(i)+4*x.bandwidth()/vars_count)
-                .attr('y', (d) => (y(0) -50 ) )
+                .attr('y', (d) => (y(0) - margin.bottom) )
                 .attr('height' , 0)
                 .attr('width', x.bandwidth()/vars_count)
 autre_v.on("mouseover", function(d , i) {		
@@ -395,7 +394,7 @@ autre_v.on("mouseover", function(d , i) {
       .style("opacity", 0);	
 })
 .transition()
-  .attr('y', (d) => (y(d.autre*100) -50 - (y(0) - y(d.Huileveg*100))- (y(0) - y(d.Margarine*100))- (y(0) - y(d.Zitziton*100))- (y(0) - y(d.Beurre*100))) )
+  .attr('y', (d) => (y(d.autre*100) - margin.bottom - (y(0) - y(d.Huileveg*100))- (y(0) - y(d.Margarine*100))- (y(0) - y(d.Zitziton*100))- (y(0) - y(d.Beurre*100))) )
   .attr('height' , (d) => y(0) - y(d.autre*100) );
 
 
@@ -407,7 +406,7 @@ var beurre_v = svg.append('g')
                   .data(data)
                   .join('rect')
                   .attr('x', (d ,i) => x(i)+4*x.bandwidth()/vars_count)
-                  .attr('y', (d) => (y(0) -50) )
+                  .attr('y', (d) => (y(0) - margin.bottom) )
                   .attr('height' , 0)
                   .attr('width', x.bandwidth()/vars_count)
     
@@ -426,7 +425,7 @@ beurre_v.on("mouseover", function(d , i) {
       .style("opacity", 0);	
 })
 .transition()
-.attr('y', (d) => (y(d.Beurre*100) -50 - (y(0) - y(d.Huileveg*100)) - (y(0) - y(d.Margarine*100)) - (y(0) - y(d.Zitziton*100))) )
+.attr('y', (d) => (y(d.Beurre*100) - margin.bottom - (y(0) - y(d.Huileveg*100)) - (y(0) - y(d.Margarine*100)) - (y(0) - y(d.Zitziton*100))) )
     .attr('height' , (d) => y(0) - y(d.Beurre*100));
 
 
@@ -437,7 +436,7 @@ var marg = svg.append('g')
               .data(data)
               .join('rect')
               .attr('x', (d ,i) => x(i)+4*x.bandwidth()/vars_count)
-              .attr('y', (d) => (y(0) -50) )
+              .attr('y', (d) => (y(0) - margin.bottom) )
               .attr('height' , 0)
               .attr('width', x.bandwidth()/vars_count)
               
@@ -456,7 +455,7 @@ marg .on("mouseover", function(d , i) {
       .style("opacity", 0);	
 })
 .transition()
-.attr('y', (d) => (y(d.Margarine*100) -50 - (y(0) - y(d.Huileveg*100))- (y(0) - y(d.Zitziton*100))) )
+.attr('y', (d) => (y(d.Margarine*100) - margin.bottom - (y(0) - y(d.Huileveg*100))- (y(0) - y(d.Zitziton*100))) )
     .attr('height' , (d) => y(0) - y(d.Margarine*100));
 
 
@@ -467,7 +466,7 @@ var zit = svg.append('g')
             .data(data)
             .join('rect')
             .attr('x', (d ,i) => x(i)+4*x.bandwidth()/vars_count)
-            .attr('y', (d) => (y(0) -50 ) )
+            .attr('y', (d) => (y(0) - margin.bottom) )
             .attr('height' , 0 )
             .attr('width', x.bandwidth()/vars_count)
 
@@ -485,7 +484,7 @@ zit.on("mouseover", function(d , i) {
       .style("opacity", 0);	
 })
 .transition()
-.attr('y', (d) => (y(d.Zitziton*100) -50 - (y(0) - y(d.Huileveg*100))) )
+.attr('y', (d) => (y(d.Zitziton*100) - margin.bottom - (y(0) - y(d.Huileveg*100))) )
     .attr('height' , (d) => y(0) - y(d.Zitziton*100) );
 
 var huile = svg.append('g')
@@ -495,7 +494,7 @@ var huile = svg.append('g')
               .data(data)
               .join('rect')
               .attr('x', (d ,i) => x(i)+4*x.bandwidth()/vars_count)
-              .attr('y', (d) => (y(0) -50) )
+              .attr('y', (d) => (y(0) - margin.bottom) )
               .attr('height' , 0)
               .attr('width', x.bandwidth()/vars_count)
     
@@ -513,7 +512,7 @@ huile.on("mouseover", function(d , i) {
       .style("opacity", 0);	
 })
 .transition()
-.attr('y', (d) => (y(d.Huileveg*100) -50) )
+.attr('y', (d) => (y(d.Huileveg*100) - margin.bottom) )
     .attr('height' , (d) => y(0) - y(d.Huileveg*100));
 
 
