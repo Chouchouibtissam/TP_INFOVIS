@@ -1,0 +1,14 @@
+{
+  "name": "@d3/treemap/2",
+  "main": "a8f8a611b13518f5@228.js",
+  "version": "228.0.0",
+  "homepage": "https://observablehq.com/@d3/treemap/2",
+  "author": {
+    "name": "D3",
+    "url": "https://observablehq.com/@d3"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}

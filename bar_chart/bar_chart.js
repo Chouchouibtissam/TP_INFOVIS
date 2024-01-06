@@ -761,8 +761,3 @@ function applyZoomYMinus(factor=0.8){
   y = d3.scaleLinear([0, y_domain[y_domain.length - 1] / factor],[height, 80]);
   d3.select(".y-axis").transition().duration(100).call(yAxis)
 }
-
-svg.node()
-
-
-

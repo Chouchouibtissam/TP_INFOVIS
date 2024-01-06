@@ -1,0 +1,276 @@
+{
+    "name": "Maladie",
+    "children": [
+     {
+      "name": "Diabète",
+      "children": [
+       {
+        "name": "Fumeur",
+        "children": [
+           {"name": "Fumeur", "value": 1.818182},
+           {"name": "Non fumeur", "value": 32.727273}
+        ]
+       },
+       {
+        "name": "Sexe",
+        "children": [
+         {"name": "Homme", "value":  14.545455},
+         {"name": "Femme", "value": 20}
+        ]
+       },
+       {
+        "name": "Activité phisyque",
+        "children": [
+         {"name": "Pasdactivityphysique", "value": 7.272727},
+         {"name": "SPlus10", "value": 27.272727}
+        ]
+       },
+       {
+        "name": "Matiere grasse",
+        "children": [
+         {"name": "Huileveg", "value": 26.126126},
+         {"name": "Zitziton", "value": 0},
+         {"name": "Margarine", "value": 3.603604},
+         {"name": "Beurre", "value": 0.900901},
+         {"name": "Autre", "value": 3.603604}
+        ]
+       },
+       {
+         "name": "Age",
+         "children": [
+          {"name": "age18_age19", "value": 10},
+          {"name": "age20_age29", "value": 16.363636},
+          {"name": "age30_age39", "value": 6.363636},
+          {"name": "ageS40", "value": 1.818182}
+         ]
+        }
+      ]
+     },
+     {
+      "name": "Asthme",
+      "children": [
+       {
+        "name": "Fumeur",
+        "children": [
+           {"name": "Fumeur", "value": 0},
+           {"name": "Non fumeur", "value": 7.272727}
+        ]
+       },
+       {
+        "name": "Sexe",
+        "children": [
+         {"name": "Homme", "value":  2.727273},
+         {"name": "Femme", "value": 4.545455}
+        ]
+       },
+       {
+        "name": "Activité phisyque",
+        "children": [
+         {"name": "Pasdactivityphysique", "value": 1.818182},
+         {"name": "SPlus10", "value": 5.454545}
+        ]
+       },
+       {
+        "name": "Matiere grasse",
+        "children": [
+         {"name": "Huileveg", "value": 7.207207},
+         {"name": "Zitziton", "value": 0},
+         {"name": "Margarine", "value": 0},
+         {"name": "Beurre", "value": 0},
+         {"name": "Autre", "value": 0}
+        ]
+       },
+       {
+         "name": "Age",
+         "children": [
+          {"name": "age18_age19", "value": 2.727273},
+          {"name": "age20_age29", "value": 3.636364},
+          {"name": "age30_age39", "value": 0.909091},
+          {"name": "ageS40", "value": 0}
+         ]
+        }
+      ]
+     },
+     {
+      "name": "HTA",
+      "children": [
+       {
+        "name": "Fumeur",
+        "children": [
+           {"name": "Fumeur", "value": 1.818182},
+           {"name": "Non fumeur", "value": 25.454545}
+        ]
+       },
+       {
+        "name": "Sexe",
+        "children": [
+         {"name": "Homme", "value":  14.545455},
+         {"name": "Femme", "value": 12.727273}
+        ]
+       },
+       {
+        "name": "Activité phisyque",
+        "children": [
+         {"name": "Pasdactivityphysique", "value": 5.454545},
+         {"name": "SPlus10", "value": 21.818182}
+        ]
+       },
+       {
+        "name": "Matiere grasse",
+        "children": [
+         {"name": "Huileveg", "value": 24.324324},
+         {"name": "Zitziton", "value": 0},
+         {"name": "Margarine", "value": 1.801802},
+         {"name": "Beurre", "value": 0.900901},
+         {"name": "Autre", "value": 0.900901}
+        ]
+       },
+       {
+         "name": "Age",
+         "children": [
+          {"name": "age18_age19", "value": 6.363636},
+          {"name": "age20_age29", "value": 14.545455},
+          {"name": "age30_age39", "value": 6.36363},
+          {"name": "ageS40", "value": 0}
+         ]
+        }
+      ]
+     },
+     {
+      "name": "Maladies cardiaques",
+      "children": [
+       {
+        "name": "Fumeur",
+        "children": [
+           {"name": "Fumeur", "value": 0},
+           {"name": "Non fumeur", "value": 1.818182}
+        ]
+       },
+       {
+        "name": "Sexe",
+        "children": [
+         {"name": "Homme", "value":  0.909091},
+         {"name": "Femme", "value": 0.909091}
+        ]
+       },
+       {
+        "name": "Activité phisyque",
+        "children": [
+         {"name": "Pasdactivityphysique", "value": 0.909091},
+         {"name": "SPlus10", "value": 0.909091}
+        ]
+       },
+       {
+        "name": "Matiere grasse",
+        "children": [
+         {"name": "Huileveg", "value": 1.801802},
+         {"name": "Zitziton", "value": 0},
+         {"name": "Margarine", "value": 0},
+         {"name": "Beurre", "value": 0},
+         {"name": "Autre", "value": 0}
+        ]
+       },
+       {
+         "name": "Age",
+         "children": [
+          {"name": "age18_age19", "value": 0.909091},
+          {"name": "age20_age29", "value": 0},
+          {"name": "age30_age39", "value": 0.909091},
+          {"name": "ageS40", "value": 0}
+         ]
+        }
+      ]
+     },
+     {
+      "name": "Insuffisance rénale",
+      "children": [
+       {
+        "name": "Fumeur",
+        "children": [
+           {"name": "Fumeur", "value": 0},
+           {"name": "Non fumeur", "value": 0.909091}
+        ]
+       },
+       {
+        "name": "Sexe",
+        "children": [
+         {"name": "Homme", "value":  0},
+         {"name": "Femme", "value": 0.909091}
+        ]
+       },
+       {
+        "name": "Activité phisyque",
+        "children": [
+         {"name": "Pasdactivityphysique", "value": 0},
+         {"name": "SPlus10", "value": 0.909091}
+        ]
+       },
+       {
+        "name": "Matiere grasse",
+        "children": [
+         {"name": "Huileveg", "value": 0.900901},
+         {"name": "Zitziton", "value": 0},
+         {"name": "Margarine", "value": 0},
+         {"name": "Beurre", "value": 0},
+         {"name": "Autre", "value": 0}
+        ]
+       },
+       {
+         "name": "Age",
+         "children": [
+          {"name": "age18_age19", "value": 0},
+          {"name": "age20_age29", "value": 0.909091},
+          {"name": "age30_age39", "value": 0},
+          {"name": "ageS40", "value": 0}
+         ]
+        }
+      ]
+     },
+     {
+      "name": "Aucune Maladie",
+      "children": [
+       {
+        "name": "Fumeur",
+        "children": [
+           {"name": "Fumeur", "value": 2.727273},
+           {"name": "Non fumeur", "value": 25.454545}
+        ]
+       },
+       {
+        "name": "Sexe",
+        "children": [
+         {"name": "Homme", "value":  19.090909},
+         {"name": "Femme", "value": 9.090909}
+        ]
+       },
+       {
+        "name": "Activité phisyque",
+        "children": [
+         {"name": "Pasdactivityphysique", "value": 6.363636},
+         {"name": "SPlus10", "value": 21.818182}
+        ]
+       },
+       {
+        "name": "Matiere grasse",
+        "children": [
+         {"name": "Huileveg", "value": 24.324324},
+         {"name": "Zitziton", "value": 0.900901},
+         {"name": "Margarine", "value": 0.900901},
+         {"name": "Beurre", "value": 1.801802},
+         {"name": "Autre", "value": 0}
+        ]
+       },
+       {
+         "name": "Age",
+         "children": [
+          {"name": "age18_age19", "value": 7.272727},
+          {"name": "age20_age29", "value": 13.636364},
+          {"name": "age30_age39", "value": 5.454545},
+          {"name": "ageS40", "value": 1.818182}
+         ]
+        }
+      ]
+     }
+    ]  
+}
+   

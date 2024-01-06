@@ -1,7 +1,7 @@
 // https://observablehq.com/@d3/zoomable-sunburst@353
 export default function define(runtime, observer) {
   const main = runtime.module();
-  const fileAttachments = new Map([["flare-2.json",new URL("./data",import.meta.url)]]);
+  const fileAttachments = new Map([["flare-2.json",new URL("./tree_data.json",import.meta.url)]]);
   main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
  
   main.variable(observer("chart")).define("chart", ["partition","data","d3","width","height","color","arc","format","radius"], function(partition,data,d3,width,height,color,arc,format,radius)
