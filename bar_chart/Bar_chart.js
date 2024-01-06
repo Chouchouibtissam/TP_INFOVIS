@@ -22,6 +22,7 @@ const margin = {top : 50 , right : 50 , bottom : 50 , left : 50}
 
 var x = d3.scaleBand().domain(d3.range(data.length)).rangeRound([margin.left, width - margin.right]).paddingInner(0.3).paddingOuter(0.2)
 var y = d3.scaleLinear().domain([0,60]).rangeRound([height, 80]);
+var vars_count = 5; // Nombre de variables actives
 
 function zoom_x(svg) {
   const extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];
@@ -34,22 +35,21 @@ function zoom_x(svg) {
 
   function zoomed(event) {
     x.rangeRound([margin.left, width - margin.right].map(d => event.transform.applyX(d)));
-    console.log(x.bandwidth());
-    svg.selectAll(".bars rect").attr("x", (d,i) => x(i)).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars-2 rect").attr("x", (d,i) => x(i)).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars2 rect").attr("x", (d,i) => x(i)+x.bandwidth()/4).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars2-2 rect").attr("x", (d,i) => x(i)+x.bandwidth()/4).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars3 rect").attr("x", (d,i) => x(i)+2*x.bandwidth()/4).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars3-2 rect").attr("x", (d,i) => x(i)+2*x.bandwidth()/4).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars3-3 rect").attr("x", (d,i) => x(i)+2*x.bandwidth()/4).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars3-4 rect").attr("x", (d,i) => x(i)+2*x.bandwidth()/4).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars4 rect").attr("x", (d,i) => x(i)+3*x.bandwidth()/4).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars4-2 rect").attr("x", (d,i) => x(i)+3*x.bandwidth()/4).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars5 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/4).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars5-2 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/4).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars5-3 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/4).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars5-4 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/4).attr("width", x.bandwidth()/4);
-    svg.selectAll(".bars5-5 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/4).attr("width", x.bandwidth()/4);
+    svg.selectAll(".bars rect").attr("x", (d,i) => x(i)).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars-2 rect").attr("x", (d,i) => x(i)).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars2 rect").attr("x", (d,i) => x(i)+x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars2-2 rect").attr("x", (d,i) => x(i)+x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars3 rect").attr("x", (d,i) => x(i)+2*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars3-2 rect").attr("x", (d,i) => x(i)+2*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars3-3 rect").attr("x", (d,i) => x(i)+2*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars3-4 rect").attr("x", (d,i) => x(i)+2*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars4 rect").attr("x", (d,i) => x(i)+3*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars4-2 rect").attr("x", (d,i) => x(i)+3*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars5 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars5-2 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars5-3 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars5-4 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars5-5 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
     svg.selectAll(".x-axis").call(xAxis);
   }
 }
@@ -97,14 +97,14 @@ var div = d3.select("body").append("div")
 //--------------------- variable  1 " Fumeur / Non fumeur" ---------------------------------------------------------------
 var fumeur = svg.append('g')
                .attr('fill' , colors.Fumeur)
-               .attr("class", "bars")
+               .attr("class", "gen_bars bars")
               .selectAll('rect')
               .data(data)
               .join('rect')
               .attr('x', (d ,i) => x(i))
               .attr('y', (d) => (y(0) -50) )
               .attr('height' , 0)
-              .attr('width', x.bandwidth()/4)
+              .attr('width', x.bandwidth()/vars_count)
    
 
 fumeur.on("mouseover", function(d , i) {		
@@ -128,7 +128,7 @@ fumeur.on("mouseover", function(d , i) {
 
 var non_fumeur =svg.append('g')
   .attr('fill' , colors.Nonfumeur)
-  .attr("class", "bars-2")
+  .attr("class", "gen_bars bars-2")
   .selectAll('rect')
   .data(data)
   .join('rect')
@@ -136,7 +136,7 @@ var non_fumeur =svg.append('g')
     .attr('y', (d) => (y(0) -50) )
     
     .attr('height' , 0)
-    .attr('width', x.bandwidth()/4)
+    .attr('width', x.bandwidth()/vars_count)
 non_fumeur .on("mouseover", function(d , i) {		
   div.transition()		
       .duration(200)		
@@ -159,14 +159,14 @@ non_fumeur .on("mouseover", function(d , i) {
  //--------------------- variable 2 " Sexe " --------------------------------------------------------------------
  var p_femme = svg.append('g')
                   .attr('fill' , colors.femme)
-                  .attr("class", "bars2")
+                  .attr("class", "gen_bars bars2")
                   .selectAll('rect')
                   .data(data)
                   .join('rect')
-                  .attr('x', (d ,i) => x(i)+x.bandwidth()/4)
+                  .attr('x', (d ,i) => x(i)+x.bandwidth()/vars_count)
                   .attr('y', (d) => (y(0) -50 ) )
                   .attr('height' , 0)
-                  .attr('width', x.bandwidth()/4)
+                  .attr('width', x.bandwidth()/vars_count)
 p_femme.on("mouseover", function(d , i) {		
  div.transition()		
      .duration(200)		
@@ -188,14 +188,14 @@ p_femme.on("mouseover", function(d , i) {
 
 var p_homme = svg.append('g')
                 .attr('fill' , colors.homme)
-                .attr("class", "bars2-2")
+                .attr("class", "gen_bars bars2-2")
                 .selectAll('rect')
                 .data(data)
                 .join('rect')
-                .attr('x', (d ,i) => x(i)+x.bandwidth()/4)
+                .attr('x', (d ,i) => x(i)+x.bandwidth()/vars_count)
                 .attr('y', (d) => (y(0) -50) )
                 .attr('height' , 0)
-                .attr('width', x.bandwidth()/4)
+                .attr('width', x.bandwidth()/vars_count)
                 
 
 
@@ -225,14 +225,14 @@ p_homme.on("mouseover", function(d , i) {
 
  var age_1 = svg.append('g')
                 .attr('fill' , colors.age18_age19)
-                .attr("class", "bars3")
+                .attr("class", "gen_bars bars3")
                 .selectAll('rect')
                 .data(data)
                 .join('rect')
-                .attr('x', (d ,i) => x(i)+2*x.bandwidth()/4)
+                .attr('x', (d ,i) => x(i)+2*x.bandwidth()/vars_count)
                 .attr('y', (d) => (y(0) -50 ) )
                 .attr('height' , 0)
-                .attr('width', x.bandwidth()/4)
+                .attr('width', x.bandwidth()/vars_count)
 age_1.on("mouseover", function(d , i) {		
  div.transition()		
      .duration(200)		
@@ -254,14 +254,14 @@ age_1.on("mouseover", function(d , i) {
 
 var age_2 = svg.append('g')
               .attr('fill' , colors.age20_age29)
-              .attr("class", "bars3-2")
+              .attr("class", "gen_bars bars3-2")
               .selectAll('rect')
               .data(data)
               .join('rect')
-              .attr('x', (d ,i) => x(i)+2*x.bandwidth()/4)
+              .attr('x', (d ,i) => x(i)+2*x.bandwidth()/vars_count)
               .attr('y', (d) => (y(0) -50) )
               .attr('height' , 0)
-              .attr('width', x.bandwidth()/4)
+              .attr('width', x.bandwidth()/vars_count)
    
 
 age_2.on("mouseover", function(d , i) {		
@@ -284,14 +284,14 @@ age_2.on("mouseover", function(d , i) {
 
 var age_3 = svg.append('g')
                .attr('fill' , colors.age30_age39)
-               .attr("class", "bars3-3")
+               .attr("class", "gen_bars bars3-3")
                .selectAll('rect')
                .data(data)
                .join('rect')
-              .attr('x', (d ,i) => x(i)+2*x.bandwidth()/4)
+              .attr('x', (d ,i) => x(i)+2*x.bandwidth()/vars_count)
               .attr('y', (d) => (y(0) -50) )
               .attr('height' , 0)
-              .attr('width', x.bandwidth()/4)
+              .attr('width', x.bandwidth()/vars_count)
    
 
 age_3.on("mouseover", function(d , i) {		
@@ -314,14 +314,14 @@ age_3.on("mouseover", function(d , i) {
 
 var age_4 = svg.append('g')
               .attr('fill' , colors.ageS40)
-              .attr("class", "bars3-4")
+              .attr("class", "gen_bars bars3-4")
               .selectAll('rect')
               .data(data)
               .join('rect')
-              .attr('x', (d ,i) => x(i)+2*x.bandwidth()/4)
+              .attr('x', (d ,i) => x(i)+2*x.bandwidth()/vars_count)
               .attr('y', (d) => (y(0) -50 ) )
               .attr('height' , 0 )
-              .attr('width', x.bandwidth()/4)
+              .attr('width', x.bandwidth()/vars_count)
 
 age_4.on("mouseover", function(d , i) {		
  div.transition()		
@@ -342,19 +342,19 @@ age_4.on("mouseover", function(d , i) {
 
 
 
-     //--------------------- variable  4 " Activité physique " -------------------
+//--------------------- variable  4 " Activité physique " -------------------
 
 
 var s_plus = svg.append('g')
                 .attr('fill' , colors.SPlus10)
-                .attr("class", "bars4")
+                .attr("class", "gen_bars bars4")
                 .selectAll('rect')
                 .data(data)
                 .join('rect')
-                .attr('x', (d ,i) => x(i)+3*x.bandwidth()/4)
+                .attr('x', (d ,i) => x(i)+3*x.bandwidth()/vars_count)
                 .attr('y', (d) => (y(0) -50 ) )
                 .attr('height' , 0 )
-                .attr('width', x.bandwidth()/4)
+                .attr('width', x.bandwidth()/vars_count)
   
 s_plus.on("mouseover", function(d , i) {		
 div.transition()		
@@ -377,14 +377,14 @@ div.transition()
 
 var pas_activity = svg.append('g')
                       .attr('fill' , colors.Pasdactivityphysique)
-                      .attr("class", "bars4-2")
+                      .attr("class", "gen_bars bars4-2")
                       .selectAll('rect')
                       .data(data)
                       .join('rect')
-                      .attr('x', (d ,i) => x(i)+3*x.bandwidth()/4)
+                      .attr('x', (d ,i) => x(i)+3*x.bandwidth()/vars_count)
                       .attr('y', (d) => (y(0) -50 )) 
                       .attr('height' , 0 )
-                      .attr('width', x.bandwidth()/4)
+                      .attr('width', x.bandwidth()/vars_count)
 pas_activity .on("mouseover", function(d , i) {		
 div.transition()		
   .duration(200)		
@@ -407,17 +407,17 @@ div.transition()
 
     
 
-  //--------------------- variable  5 " La matière grasse " -------------------
+  //--------------------- variable  5 " Huile " -------------------
 var autre_v = svg.append('g')
                 .attr('fill' , colors.autre)
-                .attr("class", "bars5")
+                .attr("class", "gen_bars bars5")
                 .selectAll('rect')
                 .data(data)
                 .join('rect')
-                .attr('x', (d ,i) => x(i)+4*x.bandwidth()/4)
+                .attr('x', (d ,i) => x(i)+4*x.bandwidth()/vars_count)
                 .attr('y', (d) => (y(0) -50 ) )
                 .attr('height' , 0)
-                .attr('width', x.bandwidth()/4)
+                .attr('width', x.bandwidth()/vars_count)
 autre_v.on("mouseover", function(d , i) {		
   div.transition()		
       .duration(200)		
@@ -439,14 +439,14 @@ autre_v.on("mouseover", function(d , i) {
 
 var beurre_v = svg.append('g')
                   .attr('fill' , colors.Beurre)
-                  .attr("class", "bars5-2")
+                  .attr("class", "gen_bars bars5-2")
                   .selectAll('rect')
                   .data(data)
                   .join('rect')
-                  .attr('x', (d ,i) => x(i)+4*x.bandwidth()/4)
+                  .attr('x', (d ,i) => x(i)+4*x.bandwidth()/vars_count)
                   .attr('y', (d) => (y(0) -50) )
                   .attr('height' , 0)
-                  .attr('width', x.bandwidth()/4)
+                  .attr('width', x.bandwidth()/vars_count)
     
 
 beurre_v.on("mouseover", function(d , i) {		
@@ -469,14 +469,14 @@ beurre_v.on("mouseover", function(d , i) {
 
 var marg = svg.append('g')
               .attr('fill' , colors.Margarine)
-              .attr("class", "bars5-3")
+              .attr("class", "gen_bars bars5-3")
               .selectAll('rect')
               .data(data)
               .join('rect')
-              .attr('x', (d ,i) => x(i)+4*x.bandwidth()/4)
+              .attr('x', (d ,i) => x(i)+4*x.bandwidth()/vars_count)
               .attr('y', (d) => (y(0) -50) )
               .attr('height' , 0)
-              .attr('width', x.bandwidth()/4)
+              .attr('width', x.bandwidth()/vars_count)
               
 
 marg .on("mouseover", function(d , i) {		
@@ -499,14 +499,14 @@ marg .on("mouseover", function(d , i) {
 
 var zit = svg.append('g')
             .attr('fill' , colors.Zitziton)
-            .attr("class", "bars5-4")
+            .attr("class", "gen_bars bars5-4")
             .selectAll('rect')
             .data(data)
             .join('rect')
-            .attr('x', (d ,i) => x(i)+4*x.bandwidth()/4)
+            .attr('x', (d ,i) => x(i)+4*x.bandwidth()/vars_count)
             .attr('y', (d) => (y(0) -50 ) )
             .attr('height' , 0 )
-            .attr('width', x.bandwidth()/4)
+            .attr('width', x.bandwidth()/vars_count)
 
 zit.on("mouseover", function(d , i) {		
   div.transition()		
@@ -525,19 +525,18 @@ zit.on("mouseover", function(d , i) {
 .attr('y', (d) => (y(d.Zitziton*100) -50 - (y(0) - y(d.Huileveg*100))) )
     .attr('height' , (d) => y(0) - y(d.Zitziton*100) );
 
-var huile =svg.append('g')
+var huile = svg.append('g')
               .attr('fill' , colors.Huileveg)
-              .attr("class", "bars5-5")
+              .attr("class", "gen_bars bars5-5")
               .selectAll('rect')
               .data(data)
               .join('rect')
-              .attr('x', (d ,i) => x(i)+4*x.bandwidth()/4)
+              .attr('x', (d ,i) => x(i)+4*x.bandwidth()/vars_count)
               .attr('y', (d) => (y(0) -50) )
               .attr('height' , 0)
-              .attr('width', x.bandwidth()/4)
+              .attr('width', x.bandwidth()/vars_count)
     
 huile.on("mouseover", function(d , i) {
-  console.log(d)	
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
@@ -555,11 +554,7 @@ huile.on("mouseover", function(d , i) {
     .attr('height' , (d) => y(0) - y(d.Huileveg*100));
 
 
-
-
-
-
-   
+// =================================== Axes ==========================================
 
 svg.append('g').attr("class", "axis").attr("class", "x-axis").call(xAxis)
 svg.append('g').attr("class", "axis").attr("class", "y-axis").call(yAxis)
@@ -576,6 +571,87 @@ var text3 = svg.append("text")
               .attr("text-anchor", "end")
               .attr("transform", "translate(220 , 30) rotate(0)")
               .text("Pourcentage %");
+
+
+// =================================== Filtrage =======================================
+
+// Transition size and position of vars according to vars_count
+function filterVars(){
+  let fumer_checked = d3.select("#fumer").property("checked");
+  let sexe_checked = d3.select("#sexe").property("checked");
+  let age_checked = d3.select("#age").property("checked");
+  let activite_physique_checked = d3.select("#activite_physique").property("checked");
+  let huile_checked = d3.select("#huile").property("checked");
+
+  vars_count = fumer_checked + sexe_checked + age_checked + activite_physique_checked + huile_checked;
+
+  let var_start = 0;
+
+  // ============ Fumer ===================
+  if(fumer_checked){
+    svg.selectAll(".bars rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars-2 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    var_start = parseInt(svg.select(".bars rect").attr("x")) + x.bandwidth()/vars_count - x(0);
+  }
+  else{
+    svg.selectAll(".bars rect").attr("width", 0);
+    svg.selectAll(".bars-2 rect").attr("width", 0);
+  }
+
+  // ============ Sexe ==================
+  if(sexe_checked){
+    svg.selectAll(".bars2 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars2-2 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    var_start = parseInt(svg.select(".bars2 rect").attr("x")) + x.bandwidth()/vars_count - x(0);
+  }
+  else{
+    svg.selectAll(".bars2 rect").attr("width", 0);
+    svg.selectAll(".bars2-2 rect").attr("width", 0);
+  }
+
+  // ================ Age ========================
+  if(age_checked){
+    svg.selectAll(".bars3 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars3-2 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars3-3 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars3-4 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    var_start = parseInt(svg.select(".bars3 rect").attr("x")) + x.bandwidth()/vars_count - x(0);
+  }
+  else{
+    svg.selectAll(".bars3 rect").attr("width", 0);
+    svg.selectAll(".bars3-2 rect").attr("width", 0);
+    svg.selectAll(".bars3-3 rect").attr("width", 0);
+    svg.selectAll(".bars3-4 rect").attr("width", 0);
+  }
+
+  // ================ Activité physique ========================
+  if(activite_physique_checked){
+    svg.selectAll(".bars4 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars4-2 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    var_start = parseInt(svg.select(".bars4 rect").attr("x")) + x.bandwidth()/vars_count - x(0);
+  }
+  else{
+    svg.selectAll(".bars4 rect").attr("width", 0);
+    svg.selectAll(".bars4-2 rect").attr("width", 0);
+  }
+
+  // ================ Huile ========================
+  if(huile_checked){
+    svg.selectAll(".bars5 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars5-2 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars5-3 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars5-4 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    svg.selectAll(".bars5-5 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
+    var_start = parseInt(svg.select(".bars5 rect").attr("x")) + x.bandwidth()/vars_count - x(0);
+  }
+  else{
+    svg.selectAll(".bars5 rect").attr("width", 0);
+    svg.selectAll(".bars5-2 rect").attr("width", 0);
+    svg.selectAll(".bars5-3 rect").attr("width", 0);
+    svg.selectAll(".bars5-4 rect").attr("width", 0);
+    svg.selectAll(".bars5-5 rect").attr("width", 0);
+  }
+}
 
 svg.node()
 

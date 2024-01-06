@@ -117,16 +117,16 @@
             <div>
               <p style="margin: 0; font-weight: bold; margin-bottom: 4px;">Filtrage</p>
               <div>
-                <input type="checkbox" id="fumer" name="fumer" checked="true">
+                <input type="checkbox" id="fumer" name="fumer" checked="true" onchange="filterVars()">
                 <label for="fumer"> Fumer </label><br>
-                <input type="checkbox" id="activite_physique" name="activite_physique" checked="true">
-                <label for="activite_physique"> Activité Physique </label><br>
-                <input type="checkbox" id="sexe" name="sexe" checked="true">
+                <input type="checkbox" id="sexe" name="sexe" checked="true" onchange="filterVars()">
                 <label for="sexe"> Sexe </label><br>
-                <input type="checkbox" id="huile" name="huile" checked="true">
-                <label for="huile"> Huile </label><br>
-                <input type="checkbox" id="age" name="age" checked="true">
+                <input type="checkbox" id="age" name="age" checked="true" onchange="filterVars()">
                 <label for="age"> Age </label><br>
+                <input type="checkbox" id="activite_physique" name="activite_physique" checked="true" onchange="filterVars()">
+                <label for="activite_physique"> Activité Physique </label><br>
+                <input type="checkbox" id="huile" name="huile" checked="true" onchange="filterVars()">
+                <label for="huile"> Huile </label><br>
               </div>
               <p style="margin: 0; font-weight: bold; margin-top: 8px;">Zoom</p>
               <p style="margin: 0; max-width: 200px; font-size: 14px;">(Vous pouvez zoomer grâce à la souris ou avec les options suivantes)</p>
