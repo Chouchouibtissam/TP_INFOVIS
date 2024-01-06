@@ -23,6 +23,13 @@ const margin = {top : 50 , right : 50 , bottom : 50 , left : 50}
 var x = d3.scaleBand().domain(d3.range(data.length)).rangeRound([margin.left, width - margin.right]).paddingInner(0.3).paddingOuter(0.2)
 var y = d3.scaleLinear().domain([0,60]).rangeRound([height, 80]);
 var vars_count = 5; // Nombre de variables actives
+var vars_starts = [...Array(vars_count).keys()].map((e) => e * x.bandwidth()/vars_count) // Initialiser la position de début des variables
+// filtres par défaut
+var fumer_checked = d3.select("#fumer").property("checked");
+var sexe_checked = d3.select("#sexe").property("checked");
+var age_checked = d3.select("#age").property("checked");
+var activite_physique_checked = d3.select("#activite_physique").property("checked");
+var huile_checked = d3.select("#huile").property("checked");
 
 function zoom_x(svg) {
   const extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];
@@ -35,21 +42,42 @@ function zoom_x(svg) {
 
   function zoomed(event) {
     x.rangeRound([margin.left, width - margin.right].map(d => event.transform.applyX(d)));
-    svg.selectAll(".bars rect").attr("x", (d,i) => x(i)).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars-2 rect").attr("x", (d,i) => x(i)).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars2 rect").attr("x", (d,i) => x(i)+x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars2-2 rect").attr("x", (d,i) => x(i)+x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars3 rect").attr("x", (d,i) => x(i)+2*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars3-2 rect").attr("x", (d,i) => x(i)+2*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars3-3 rect").attr("x", (d,i) => x(i)+2*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars3-4 rect").attr("x", (d,i) => x(i)+2*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars4 rect").attr("x", (d,i) => x(i)+3*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars4-2 rect").attr("x", (d,i) => x(i)+3*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars5 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars5-2 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars5-3 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars5-4 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
-    svg.selectAll(".bars5-5 rect").attr("x", (d,i) => x(i)+4*x.bandwidth()/vars_count).attr("width", x.bandwidth()/vars_count);
+    calculateVarStarts()
+    // ============== Fumer ==================
+    if(fumer_checked){
+      svg.selectAll(".bars rect").attr("x", (d,i) => x(i) + vars_starts[0]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars-2 rect").attr("x", (d,i) => x(i) + vars_starts[0]).attr("width", x.bandwidth()/vars_count);
+    }
+    
+    // ============ Sexe ======================
+    if(sexe_checked){
+      svg.selectAll(".bars2 rect").attr("x", (d,i) => x(i) + vars_starts[1]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars2-2 rect").attr("x", (d,i) => x(i) + vars_starts[1]).attr("width", x.bandwidth()/vars_count);
+    }
+    
+    // ============ Age ========================
+    if(age_checked){
+      svg.selectAll(".bars3 rect").attr("x", (d,i) => x(i) + vars_starts[2]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars3-2 rect").attr("x", (d,i) => x(i) + vars_starts[2]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars3-3 rect").attr("x", (d,i) => x(i) + vars_starts[2]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars3-4 rect").attr("x", (d,i) => x(i) + vars_starts[2]).attr("width", x.bandwidth()/vars_count);
+    }
+
+    // ============ Activité physique ===========
+    if(activite_physique_checked){
+      svg.selectAll(".bars4 rect").attr("x", (d,i) => x(i) + vars_starts[3]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars4-2 rect").attr("x", (d,i) => x(i) + vars_starts[3]).attr("width", x.bandwidth()/vars_count);
+    }
+
+    // ============ Huile ====================
+    if(huile_checked){
+      svg.selectAll(".bars5 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars5-2 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars5-3 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars5-4 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars5-5 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
+    }
+
     svg.selectAll(".x-axis").call(xAxis);
   }
 }
@@ -572,16 +600,53 @@ var text3 = svg.append("text")
               .attr("transform", "translate(220 , 30) rotate(0)")
               .text("Pourcentage %");
 
+// ================================== Utils functions =================================
+function calculateVarStarts(){
+
+  vars_count = fumer_checked + sexe_checked + age_checked + activite_physique_checked + huile_checked;
+
+  let var_start = 0;
+
+  // ============ Fumer ===================
+  if(fumer_checked){
+    vars_starts[0] = var_start;
+    var_start += x.bandwidth()/vars_count;
+  }
+
+  // ============ Sexe ==================
+  if(sexe_checked){
+    vars_starts[1] = var_start;
+    var_start += x.bandwidth()/vars_count;
+  }
+
+  // ================ Age ========================
+  if(age_checked){
+    vars_starts[2] = var_start;
+    var_start += x.bandwidth()/vars_count;
+  }
+
+  // ================ Activité physique ========================
+  if(activite_physique_checked){
+    vars_starts[3] = var_start;
+    var_start += x.bandwidth()/vars_count;
+  }
+
+  // ================ Huile ========================
+  if(huile_checked){
+    vars_starts[4] = var_start;
+    var_start += x.bandwidth()/vars_count;
+  }
+}
 
 // =================================== Filtrage =======================================
 
 // Transition size and position of vars according to vars_count
 function filterVars(){
-  let fumer_checked = d3.select("#fumer").property("checked");
-  let sexe_checked = d3.select("#sexe").property("checked");
-  let age_checked = d3.select("#age").property("checked");
-  let activite_physique_checked = d3.select("#activite_physique").property("checked");
-  let huile_checked = d3.select("#huile").property("checked");
+  fumer_checked = d3.select("#fumer").property("checked");
+  sexe_checked = d3.select("#sexe").property("checked");
+  age_checked = d3.select("#age").property("checked");
+  activite_physique_checked = d3.select("#activite_physique").property("checked");
+  huile_checked = d3.select("#huile").property("checked");
 
   vars_count = fumer_checked + sexe_checked + age_checked + activite_physique_checked + huile_checked;
 
@@ -592,6 +657,7 @@ function filterVars(){
     svg.selectAll(".bars rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
     svg.selectAll(".bars-2 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
     var_start = parseInt(svg.select(".bars rect").attr("x")) + x.bandwidth()/vars_count - x(0);
+    vars_starts[0] = var_start;
   }
   else{
     svg.selectAll(".bars rect").attr("width", 0);
@@ -603,6 +669,7 @@ function filterVars(){
     svg.selectAll(".bars2 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
     svg.selectAll(".bars2-2 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
     var_start = parseInt(svg.select(".bars2 rect").attr("x")) + x.bandwidth()/vars_count - x(0);
+    vars_starts[1] = var_start;
   }
   else{
     svg.selectAll(".bars2 rect").attr("width", 0);
@@ -616,6 +683,7 @@ function filterVars(){
     svg.selectAll(".bars3-3 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
     svg.selectAll(".bars3-4 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
     var_start = parseInt(svg.select(".bars3 rect").attr("x")) + x.bandwidth()/vars_count - x(0);
+    vars_starts[2] = var_start;
   }
   else{
     svg.selectAll(".bars3 rect").attr("width", 0);
@@ -629,6 +697,7 @@ function filterVars(){
     svg.selectAll(".bars4 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
     svg.selectAll(".bars4-2 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
     var_start = parseInt(svg.select(".bars4 rect").attr("x")) + x.bandwidth()/vars_count - x(0);
+    vars_starts[3] = var_start;
   }
   else{
     svg.selectAll(".bars4 rect").attr("width", 0);
@@ -643,6 +712,7 @@ function filterVars(){
     svg.selectAll(".bars5-4 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
     svg.selectAll(".bars5-5 rect").attr("x", (d,i) => x(i) + var_start).attr("width", x.bandwidth()/vars_count);
     var_start = parseInt(svg.select(".bars5 rect").attr("x")) + x.bandwidth()/vars_count - x(0);
+    vars_starts[4] = var_start;
   }
   else{
     svg.selectAll(".bars5 rect").attr("width", 0);
