@@ -21,99 +21,34 @@ const width = 1200
 const margin = {top : 50 , right : 50 , bottom : 50 , left : 50}
 
 var x = d3.scaleBand().domain(d3.range(data.length)).rangeRound([margin.left, width - margin.right]).paddingInner(0.3).paddingOuter(0.2)
-var y = d3.scaleLinear().domain([0,60]).rangeRound([height, 80]);
+var y = d3.scaleLinear([0, 60],[height, 80]);
 var vars_count = 5; // Nombre de variables actives
 var vars_starts = [...Array(vars_count).keys()].map((e) => e * x.bandwidth()/vars_count) // Initialiser la position de début des variables
-// filtres par défaut
+// ========= filtres par défaut =========
 var fumer_checked = d3.select("#fumer").property("checked");
 var sexe_checked = d3.select("#sexe").property("checked");
 var age_checked = d3.select("#age").property("checked");
 var activite_physique_checked = d3.select("#activite_physique").property("checked");
 var huile_checked = d3.select("#huile").property("checked");
+// ======================================
+var zoom_x_instance; // controlleur du zoom sur l'axe X
+var zoom_y_instance; // controlleur du zoom sur l'axe Y
+const zoom_extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];
 
-function zoom_x(svg) {
-  const extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];
-
-  svg.call(d3.zoom()
-      .scaleExtent([1, 14])
-      .translateExtent(extent)
-      .extent(extent)
-      .on("zoom", zoomed));
-
-  function zoomed(event) {
-    x.rangeRound([margin.left, width - margin.right].map(d => event.transform.applyX(d)));
-    calculateVarStarts()
-    // ============== Fumer ==================
-    if(fumer_checked){
-      svg.selectAll(".bars rect").attr("x", (d,i) => x(i) + vars_starts[0]).attr("width", x.bandwidth()/vars_count);
-      svg.selectAll(".bars-2 rect").attr("x", (d,i) => x(i) + vars_starts[0]).attr("width", x.bandwidth()/vars_count);
-    }
-    
-    // ============ Sexe ======================
-    if(sexe_checked){
-      svg.selectAll(".bars2 rect").attr("x", (d,i) => x(i) + vars_starts[1]).attr("width", x.bandwidth()/vars_count);
-      svg.selectAll(".bars2-2 rect").attr("x", (d,i) => x(i) + vars_starts[1]).attr("width", x.bandwidth()/vars_count);
-    }
-    
-    // ============ Age ========================
-    if(age_checked){
-      svg.selectAll(".bars3 rect").attr("x", (d,i) => x(i) + vars_starts[2]).attr("width", x.bandwidth()/vars_count);
-      svg.selectAll(".bars3-2 rect").attr("x", (d,i) => x(i) + vars_starts[2]).attr("width", x.bandwidth()/vars_count);
-      svg.selectAll(".bars3-3 rect").attr("x", (d,i) => x(i) + vars_starts[2]).attr("width", x.bandwidth()/vars_count);
-      svg.selectAll(".bars3-4 rect").attr("x", (d,i) => x(i) + vars_starts[2]).attr("width", x.bandwidth()/vars_count);
-    }
-
-    // ============ Activité physique ===========
-    if(activite_physique_checked){
-      svg.selectAll(".bars4 rect").attr("x", (d,i) => x(i) + vars_starts[3]).attr("width", x.bandwidth()/vars_count);
-      svg.selectAll(".bars4-2 rect").attr("x", (d,i) => x(i) + vars_starts[3]).attr("width", x.bandwidth()/vars_count);
-    }
-
-    // ============ Huile ====================
-    if(huile_checked){
-      svg.selectAll(".bars5 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
-      svg.selectAll(".bars5-2 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
-      svg.selectAll(".bars5-3 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
-      svg.selectAll(".bars5-4 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
-      svg.selectAll(".bars5-5 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
-    }
-
-    svg.selectAll(".x-axis").call(xAxis);
-  }
-}
-
-function zoom_y(svg){
-  const extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];
-
-  svg.call(d3.zoom()
-      .scaleExtent([1, 14])
-      .translateExtent(extent)
-      .extent(extent)
-      .on("zoom", zoomed));
-  
-  function zoomed(event){
-    y.range([height - margin.bottom, margin.top].map(d => event.transform.applyY(d)));
-
-    // svg.selectAll(".bars rect")
-    //   .attr("y", d => y(d.y))
-    //   .attr("height", d => height - margin.bottom - y(d.y));
-
-    svg.selectAll(".y-axis").call(yAxis);
-  }
-}
+// ================================ Graphical elements ===================================================================
 
 var svg = d3.select("#chart_container").append("svg")
-                                       .attr("width", width -50 )
+                                       .attr("width", width -50)
                                        .attr("height", height)
                                        .attr("viewBox", [0, 0, width, height])      
                                        .attr("class" , "chart")
                                        .call(zoom_x);
                                   
 function xAxis(g){
-  g.attr('transform', `translate(0 , ${height -50})`).call(d3.axisBottom(x).tickFormat(i => data[i].Maladies))
+  g.attr('transform', `translate(0 , ${height - margin.bottom})`).call(d3.axisBottom(x).tickFormat(i => data[i].Maladies));
 }
 function yAxis(g){
-  g.attr('transform', 'translate(50 ,-50)').attr('font-size' , '20px').call(d3.axisLeft(y).ticks( null , data.format))
+  g.attr('transform', 'translate(50 ,-50)').call(d3.axisLeft(y).ticks( null , data.format));
 }
 
 var div = d3.select("body").append("div")	
@@ -638,7 +573,7 @@ function calculateVarStarts(){
   }
 }
 
-// =================================== Filtrage =======================================
+// =================================== Filtering =======================================
 
 // Transition size and position of vars according to vars_count
 function filterVars(){
@@ -721,6 +656,111 @@ function filterVars(){
     svg.selectAll(".bars5-4 rect").attr("width", 0);
     svg.selectAll(".bars5-5 rect").attr("width", 0);
   }
+}
+
+// ============================== Zooming ================================================
+
+function zoom_x(svg) {
+  zoom_x_instance = d3.zoom()
+  .scaleExtent([1, 14])
+  .translateExtent(zoom_extent)
+  .extent(zoom_extent)
+  .on("zoom", zoomed);
+
+  svg.call(zoom_x_instance);
+
+  function zoomed(event) {
+    x.rangeRound([margin.left, width - margin.right].map(d => event.transform.applyX(d)));
+    calculateVarStarts()
+    // ============== Fumer ==================
+    if(fumer_checked){
+      svg.selectAll(".bars rect").attr("x", (d,i) => x(i) + vars_starts[0]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars-2 rect").attr("x", (d,i) => x(i) + vars_starts[0]).attr("width", x.bandwidth()/vars_count);
+    }
+    
+    // ============ Sexe ======================
+    if(sexe_checked){
+      svg.selectAll(".bars2 rect").attr("x", (d,i) => x(i) + vars_starts[1]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars2-2 rect").attr("x", (d,i) => x(i) + vars_starts[1]).attr("width", x.bandwidth()/vars_count);
+    }
+    
+    // ============ Age ========================
+    if(age_checked){
+      svg.selectAll(".bars3 rect").attr("x", (d,i) => x(i) + vars_starts[2]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars3-2 rect").attr("x", (d,i) => x(i) + vars_starts[2]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars3-3 rect").attr("x", (d,i) => x(i) + vars_starts[2]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars3-4 rect").attr("x", (d,i) => x(i) + vars_starts[2]).attr("width", x.bandwidth()/vars_count);
+    }
+
+    // ============ Activité physique ===========
+    if(activite_physique_checked){
+      svg.selectAll(".bars4 rect").attr("x", (d,i) => x(i) + vars_starts[3]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars4-2 rect").attr("x", (d,i) => x(i) + vars_starts[3]).attr("width", x.bandwidth()/vars_count);
+    }
+
+    // ============ Huile ====================
+    if(huile_checked){
+      svg.selectAll(".bars5 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars5-2 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars5-3 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars5-4 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
+      svg.selectAll(".bars5-5 rect").attr("x", (d,i) => x(i) + vars_starts[4]).attr("width", x.bandwidth()/vars_count);
+    }
+
+    svg.selectAll(".x-axis").call(xAxis);
+  }
+}
+
+function zoom_y(svg){
+  zoom_y_instance = d3.zoom()
+      .scaleExtent([1, 14])
+      .translateExtent(zoom_extent)
+      .extent(zoom_extent);
+
+  svg.call(zoom_y_instance);
+}
+
+function applyZoomXPlus(factor=1.4){
+  zoom_x_instance.scaleBy(svg.transition().duration(100), factor);
+}
+
+function applyZoomXMinus(factor=0.6){
+  zoom_x_instance.scaleBy(svg.transition().duration(100), factor);
+}
+
+function applyZoomYPlus(factor=1.2){
+  // ============= Bars ==============
+  d3.selectAll(".gen_bars rect").transition().duration(200).attr("height", (d, i, nodes) => {
+    const currentHeight = parseFloat(d3.select(nodes[i]).attr('height'));
+    return currentHeight * factor;
+  }).attr('y', (d, i, nodes) => {
+    const currentHeight = parseFloat(d3.select(nodes[i]).attr('height'));
+    const pastHeight = currentHeight / factor;
+    const currentY = parseFloat(d3.select(nodes[i]).attr('y'));
+    return (y(0) - margin.bottom) - currentHeight - ((y(0) - margin.bottom) - (currentY + pastHeight)) * factor;
+  });
+
+  // ============= Y Axis ===========
+  y_domain = y.domain();
+  y = d3.scaleLinear([0, y_domain[y_domain.length - 1] / factor],[height, 80]);
+  d3.select(".y-axis").transition().duration(200).call(yAxis)
+}
+
+function applyZoomYMinus(factor=0.8){
+  d3.selectAll(".gen_bars rect").transition().duration(200).attr("height", (d, i, nodes) => {
+    const currentHeight = parseFloat(d3.select(nodes[i]).attr('height'));
+    return currentHeight * factor;
+  }).attr('y', (d, i, nodes) => {
+    const currentHeight = parseFloat(d3.select(nodes[i]).attr('height'));
+    const pastHeight = currentHeight / factor;
+    const currentY = parseFloat(d3.select(nodes[i]).attr('y'));
+    return (y(0) - margin.bottom) - currentHeight - ((y(0) - margin.bottom) - (currentY + pastHeight)) * factor;
+  });
+
+  // ============= Y Axis ===========
+  y_domain = y.domain();
+  y = d3.scaleLinear([0, y_domain[y_domain.length - 1] / factor],[height, 80]);
+  d3.select(".y-axis").transition().duration(200).call(yAxis)
 }
 
 svg.node()
