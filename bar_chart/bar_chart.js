@@ -567,14 +567,14 @@ svg.append('g').attr("class", "axis").attr("class", "x-axis").call(xAxis)
 svg.append('g').attr("class", "axis").attr("class", "y-axis").call(yAxis)
 var text3 = svg.append("text")
               .style("fill", "black")
-              .style("font-size", "23px")
+              .style("font-size", "22px")
               .attr("text-anchor", "end")
               .attr("transform", `translate(${width - 20},${height}) rotate(0)`)
               .text("Maladies");
 
 var text3 = svg.append("text")
               .style("fill", "black")
-              .style("font-size", "23px")
+              .style("font-size", "22px")
               .attr("text-anchor", "end")
               .attr("transform", "translate(220 , 30) rotate(0)")
               .text("Pourcentage %");
