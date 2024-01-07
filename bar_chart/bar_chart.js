@@ -70,7 +70,9 @@ var fumeur = svg.append('g')
               .attr('width', x.bandwidth()/vars_count)
    
 
-fumeur.on("mouseover", function(d , i) {		
+fumeur.on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars").style("opacity", 1);
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
@@ -78,7 +80,8 @@ fumeur.on("mouseover", function(d , i) {
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					
-.on("mouseout", function(d) {		
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);
   div.transition()		
       .duration(500)		
       .style("opacity", 0);	
@@ -99,7 +102,9 @@ var non_fumeur =svg.append('g')
     .attr('y', (d) => (y(0) - margin.bottom) )
     .attr('height' , 0)
     .attr('width', x.bandwidth()/vars_count)
-non_fumeur .on("mouseover", function(d , i) {		
+non_fumeur .on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars-2").style("opacity", 1);
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
@@ -107,7 +112,8 @@ non_fumeur .on("mouseover", function(d , i) {
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					
-.on("mouseout", function(d) {		
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);	
   div.transition()		
       .duration(500)		
       .style("opacity", 0);	
@@ -129,18 +135,21 @@ non_fumeur .on("mouseover", function(d , i) {
                   .attr('y', (d) => (y(0) - margin.bottom) )
                   .attr('height' , 0)
                   .attr('width', x.bandwidth()/vars_count)
-p_femme.on("mouseover", function(d , i) {		
- div.transition()		
-     .duration(200)		
-     .style("opacity", .9);		
- div	.html("Pourcentage des femmes pour " + i.Maladies + "<br/>"  + (i.femme * 100).toFixed(2) + "%")	
-     .style("left", (d.pageX + 20) + "px")		
-     .style("top", (d.pageY - 28) + "px");	
+p_femme.on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars2").style("opacity", 1);
+  div.transition()		
+      .duration(200)		
+      .style("opacity", .9);		
+  div	.html("Pourcentage des femmes pour " + i.Maladies + "<br/>"  + (i.femme * 100).toFixed(2) + "%")	
+      .style("left", (d.pageX + 20) + "px")
+      .style("top", (d.pageY - 28) + "px");
  })					
-.on("mouseout", function(d) {		
- div.transition()		
-     .duration(500)		
-     .style("opacity", 0);	
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);
+  div.transition()	
+      .duration(500)
+      .style("opacity", 0);
 })
 .transition()
 .attr('y', (d) => (y(d.femme*100) - margin.bottom - (y(0) - y(d.homme*100))) )
@@ -161,18 +170,21 @@ var p_homme = svg.append('g')
                 
 
 
-p_homme.on("mouseover", function(d , i) {		
- div.transition()		
-     .duration(200)		
-     .style("opacity", .9);		
- div.html("Pourcentage d'hommes pour " + i.Maladies + "<br/>"  + (i.homme * 100).toFixed(2) + "%")	
-     .style("left", (d.pageX + 20) + "px")		
-     .style("top", (d.pageY - 28) + "px");	
+p_homme.on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars2-2").style("opacity", 1);
+  div.transition()		
+      .duration(200)		
+      .style("opacity", .9);		
+  div.html("Pourcentage d'hommes pour " + i.Maladies + "<br/>"  + (i.homme * 100).toFixed(2) + "%")	
+      .style("left", (d.pageX + 20) + "px")
+      .style("top", (d.pageY - 28) + "px");
  })					
-.on("mouseout", function(d) {		
- div.transition()		
-     .duration(500)		
-     .style("opacity", 0);	
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);	
+  div.transition()		
+      .duration(500)		
+      .style("opacity", 0);
 })
 .transition()
 .attr('y', (d) => (y(d.homme*100) - margin.bottom) )
@@ -195,18 +207,21 @@ p_homme.on("mouseover", function(d , i) {
                 .attr('y', (d) => (y(0) - margin.bottom) )
                 .attr('height' , 0)
                 .attr('width', x.bandwidth()/vars_count)
-age_1.on("mouseover", function(d , i) {		
- div.transition()		
-     .duration(200)		
-     .style("opacity", .9);		
- div	.html("Age entre 18 et 20ans pour " + i.Maladies + "<br/>"  + (i.age18_age19 * 100).toFixed(2) + "%")	
-     .style("left", (d.pageX + 20) + "px")		
-     .style("top", (d.pageY - 28) + "px");	
+age_1.on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars3").style("opacity", 1);
+  div.transition()		
+      .duration(200)		
+      .style("opacity", .9);		
+  div	.html("Age entre 18 et 20ans pour " + i.Maladies + "<br/>"  + (i.age18_age19 * 100).toFixed(2) + "%")	
+      .style("left", (d.pageX + 20) + "px")		
+      .style("top", (d.pageY - 28) + "px");
  })					
-.on("mouseout", function(d) {		
- div.transition()		
-     .duration(500)		
-     .style("opacity", 0);	
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);
+  div.transition()		
+      .duration(500)		
+      .style("opacity", 0);
 })
 .transition()
  .attr('y', (d) => (y(d.age18_age19*100) - margin.bottom - (y(0) - y(d.age20_age29*100))- (y(0) - y(d.age30_age39*100))- (y(0) - y(d. ageS40*100))) )
@@ -226,18 +241,21 @@ var age_2 = svg.append('g')
               .attr('width', x.bandwidth()/vars_count)
    
 
-age_2.on("mouseover", function(d , i) {		
- div.transition()		
-     .duration(200)		
-     .style("opacity", .9);		
- div	.html("Age entre 20 et 29ans pour " + i.Maladies + "<br/>"  + (i.age20_age29 * 100).toFixed(2) + "%")	
-     .style("left", (d.pageX + 20) + "px")		
-     .style("top", (d.pageY - 28) + "px");	
+age_2.on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars3-2").style("opacity", 1);
+  div.transition()		
+      .duration(200)		
+      .style("opacity", .9);		
+  div	.html("Age entre 20 et 29ans pour " + i.Maladies + "<br/>"  + (i.age20_age29 * 100).toFixed(2) + "%")	
+      .style("left", (d.pageX + 20) + "px")		
+      .style("top", (d.pageY - 28) + "px");	
  })					
-.on("mouseout", function(d) {		
- div.transition()		
-     .duration(500)		
-     .style("opacity", 0);	
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);		
+  div.transition()		
+      .duration(500)		
+      .style("opacity", 0);
 })
 .transition()
 .attr('y', (d) => (y(d.age20_age29*100) - margin.bottom - (y(0) - y(d.age30_age39*100)) - (y(0) - y(d.ageS40*100))) )
@@ -256,18 +274,21 @@ var age_3 = svg.append('g')
               .attr('width', x.bandwidth()/vars_count)
    
 
-age_3.on("mouseover", function(d , i) {		
- div.transition()		
-     .duration(200)		
-     .style("opacity", .9);		
- div	.html("Age entre 30 et 39ans pour " + i.Maladies + "<br/>"  + (i.age30_age39 * 100).toFixed(2) + "%")	
-     .style("left", (d.pageX + 20) + "px")		
-     .style("top", (d.pageY - 28) + "px");	
+age_3.on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars3-3").style("opacity", 1);		
+  div.transition()		
+      .duration(200)		
+      .style("opacity", .9);		
+  div	.html("Age entre 30 et 39ans pour " + i.Maladies + "<br/>"  + (i.age30_age39 * 100).toFixed(2) + "%")
+      .style("left", (d.pageX + 20) + "px")
+      .style("top", (d.pageY - 28) + "px");
  })					
-.on("mouseout", function(d) {		
- div.transition()		
-     .duration(500)		
-     .style("opacity", 0);	
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);		
+  div.transition()		
+      .duration(500)		
+      .style("opacity", 0);
 })
 .transition()
 .attr('y', (d) => (y(d.age30_age39*100) - margin.bottom - (y(0) - y(d.ageS40*100))) )
@@ -285,18 +306,21 @@ var age_4 = svg.append('g')
               .attr('height' , 0 )
               .attr('width', x.bandwidth()/vars_count)
 
-age_4.on("mouseover", function(d , i) {		
- div.transition()		
-     .duration(200)		
-     .style("opacity", .9);		
- div	.html("Age >40 pour " + i.Maladies + "<br/>"  + (i.ageS40 * 100).toFixed(2) + "%")	
-     .style("left", (d.pageX + 20) + "px")		
-     .style("top", (d.pageY - 28) + "px");	
+age_4.on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars3-4").style("opacity", 1);		
+  div.transition()		
+      .duration(200)		
+      .style("opacity", .9);		
+  div	.html("Age >40 pour " + i.Maladies + "<br/>"  + (i.ageS40 * 100).toFixed(2) + "%")	
+      .style("left", (d.pageX + 20) + "px")		
+      .style("top", (d.pageY - 28) + "px");	
  })					
-.on("mouseout", function(d) {		
- div.transition()		
-     .duration(500)		
-     .style("opacity", 0);	
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);		
+  div.transition()		
+      .duration(500)		
+      .style("opacity", 0);
 })
 .transition()
 .attr('y', (d) => (y(d.ageS40*100) - margin.bottom) )
@@ -318,18 +342,21 @@ var s_plus = svg.append('g')
                 .attr('height' , 0 )
                 .attr('width', x.bandwidth()/vars_count)
   
-s_plus.on("mouseover", function(d , i) {		
-div.transition()		
-  .duration(200)		
-  .style("opacity", .9);		
-div	.html("Activité physique +10min pour " + i.Maladies + "<br/>"  + (i.SPlus10 * 100).toFixed(2)+ "%")	
-  .style("left", (d.pageX + 20) + "px")		
-  .style("top", (d.pageY - 28) + "px");	
+s_plus.on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars4").style("opacity", 1);			
+  div.transition()		
+    .duration(200)		
+    .style("opacity", .9);		
+  div	.html("Activité physique +10min pour " + i.Maladies + "<br/>"  + (i.SPlus10 * 100).toFixed(2)+ "%")	
+    .style("left", (d.pageX + 20) + "px")		
+    .style("top", (d.pageY - 28) + "px");	
 })					
-.on("mouseout", function(d) {		
-div.transition()		
-  .duration(500)		
-  .style("opacity", 0);	
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);		
+  div.transition()		
+    .duration(500)		
+    .style("opacity", 0);
 })
 .transition()
 .attr('y', (d) => (y(d.SPlus10*100) - margin.bottom - ((y(0) - y(d.Pasdactivityphysique*100)))) )
@@ -347,18 +374,21 @@ var pas_activity = svg.append('g')
                       .attr('y', (d) => (y(0) - margin.bottom)) 
                       .attr('height' , 0 )
                       .attr('width', x.bandwidth()/vars_count)
-pas_activity .on("mouseover", function(d , i) {		
-div.transition()		
-  .duration(200)		
-  .style("opacity", .9);		
-div	.html("Pas d'activité physique pour " + i.Maladies + "<br/>"  + (i.Pasdactivityphysique * 100).toFixed(2)+ "%")	
-  .style("left", (d.pageX + 20) + "px")		
-  .style("top", (d.pageY - 28) + "px");	
+pas_activity .on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars4-2").style("opacity", 1);		
+  div.transition()		
+    .duration(200)		
+    .style("opacity", .9);		
+  div	.html("Pas d'activité physique pour " + i.Maladies + "<br/>"  + (i.Pasdactivityphysique * 100).toFixed(2)+ "%")	
+    .style("left", (d.pageX + 20) + "px")		
+    .style("top", (d.pageY - 28) + "px");	
 })					
-.on("mouseout", function(d) {		
-div.transition()		
-  .duration(500)		
-  .style("opacity", 0);	
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);	
+  div.transition()		
+    .duration(500)		
+    .style("opacity", 0);	
 })
 .transition()
 .attr('y', (d) => (y(d.Pasdactivityphysique*100) - margin.bottom)) 
@@ -380,7 +410,9 @@ var autre_v = svg.append('g')
                 .attr('y', (d) => (y(0) - margin.bottom) )
                 .attr('height' , 0)
                 .attr('width', x.bandwidth()/vars_count)
-autre_v.on("mouseover", function(d , i) {		
+autre_v.on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars5").style("opacity", 1);		
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
@@ -388,7 +420,8 @@ autre_v.on("mouseover", function(d , i) {
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					
-.on("mouseout", function(d) {		
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);	
   div.transition()		
       .duration(500)		
       .style("opacity", 0);	
@@ -411,7 +444,9 @@ var beurre_v = svg.append('g')
                   .attr('width', x.bandwidth()/vars_count)
     
 
-beurre_v.on("mouseover", function(d , i) {		
+beurre_v.on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars5-2").style("opacity", 1);		
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
@@ -419,7 +454,8 @@ beurre_v.on("mouseover", function(d , i) {
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					
-.on("mouseout", function(d) {		
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);		
   div.transition()		
       .duration(500)		
       .style("opacity", 0);	
@@ -441,7 +477,9 @@ var marg = svg.append('g')
               .attr('width', x.bandwidth()/vars_count)
               
 
-marg .on("mouseover", function(d , i) {		
+marg .on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars5-3").style("opacity", 1);			
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
@@ -449,7 +487,8 @@ marg .on("mouseover", function(d , i) {
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					
-.on("mouseout", function(d) {		
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);	
   div.transition()		
       .duration(500)		
       .style("opacity", 0);	
@@ -470,7 +509,9 @@ var zit = svg.append('g')
             .attr('height' , 0 )
             .attr('width', x.bandwidth()/vars_count)
 
-zit.on("mouseover", function(d , i) {		
+zit.on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars5-4").style("opacity", 1);		
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
@@ -478,7 +519,8 @@ zit.on("mouseover", function(d , i) {
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					
-.on("mouseout", function(d) {		
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);	
   div.transition()		
       .duration(500)		
       .style("opacity", 0);	
@@ -499,14 +541,17 @@ var huile = svg.append('g')
               .attr('width', x.bandwidth()/vars_count)
     
 huile.on("mouseover", function(d , i) {
+  d3.selectAll(".gen_bars").style("opacity", 0.3);
+  d3.selectAll(".bars5-5").style("opacity", 1);
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
-  div	.html("Huile végétale pour " + i.Maladies + "<br/>"  + (i.Huileveg * 100).toFixed(2) + "%")	
+  div.html("Huile végétale pour " + i.Maladies + "<br/>"  + (i.Huileveg * 100).toFixed(2) + "%")	
       .style("left", (d.pageX + 20) + "px")		
       .style("top", (d.pageY - 28) + "px");	
   })					
-.on("mouseout", function(d) {		
+.on("mouseout", function(d) {
+  d3.selectAll(".gen_bars").style("opacity", 1);	
   div.transition()		
       .duration(500)		
       .style("opacity", 0);	
@@ -708,15 +753,6 @@ function zoom_x(svg) {
 
     svg.selectAll(".x-axis").call(xAxis);
   }
-}
-
-function zoom_y(svg){
-  zoom_y_instance = d3.zoom()
-      .scaleExtent([1, 14])
-      .translateExtent(zoom_extent)
-      .extent(zoom_extent);
-
-  svg.call(zoom_y_instance);
 }
 
 function applyZoomXPlus(factor=1.4){
