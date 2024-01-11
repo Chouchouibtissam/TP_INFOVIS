@@ -15,137 +15,131 @@
   <title>TP Infovis</title>
 </head>
 <body>
-  <div
-    style="margin: 0; position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: end; justify-content: center;">
-    <div id="navbar"
-        style="width: 100%; display: flex; align-items: center; flex-direction: column;">
-        <h1 class="title" style="margin-top: 50px;">Diagramme de barres</h1>
-        <ul style="list-style-type: none; margin-top: 12px;">
-            <li style="display: inline; padding: 20px;"><a class="nav-button-activated" href="./index.html">Diagramme de barres</a></li>
-            <li style="display: inline; padding: 20px;"><a class="nav-button" href="./pie_chart/index.html">Diagramme Circulaire</a></li>
-            <li style="display: inline; padding: 20px;"><a class="nav-button" href="./tree_map/index.html">Tree Map</a></li>
-        </ul>
-    </div>
-   <div
-      style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;  background-color: rgb(255, 255, 255); flex-direction: row;">
-      <div style="display: flex; flex-direction: row;">
-        <div id="chart_container" style="margin: 0px;"></div>
-        <div id="options-container" class="flex-container" style="display: flex; flex-direction: column; max-width: 100%; background-color: rgb(138, 196, 247); border-top-right-radius: 20px; border-bottom-right-radius: 20px;">
-          <div style="flex: 0 1 auto; display: flex; flex-direction: row; justify-content: center; align-items: center;">
-            <button id="legend-button" class="option-button" style="width: 100%;" onclick="switchToLegend()">Légende</button>
-            <button id="interactions-button" class="option-button" style="width: 100%;" onclick="switchToInteractions()">Intéractions</button>
+  <div id="navbar"
+      style="width: 100%; display: flex; align-items: center; flex-direction: column; margin-bottom: 10px;">
+      <h1 class="title" style="margin-top: 50px;">Diagramme de barres</h1>
+      <ul style="list-style-type: none; margin-top: 12px;">
+          <li style="display: inline; padding: 20px;"><a class="nav-button-activated" href="./index.html">Diagramme de barres</a></li>
+          <li style="display: inline; padding: 20px;"><a class="nav-button" href="./pie_chart/index.html">Diagramme Circulaire</a></li>
+          <li style="display: inline; padding: 20px;"><a class="nav-button" href="./tree_map/index.html">Tree Map</a></li>
+      </ul>
+  </div>
+  <div id="all-chart-container">
+    <div id="chart_container" style="margin: 0px;"></div>
+    <div id="options-container">
+      <div style="flex: 0 1 auto; display: flex; flex-direction: row; justify-content: center; align-items: center;">
+        <button id="legend-button" class="option-button" style="width: 100%;" onclick="switchToLegend()">Légende</button>
+        <button id="interactions-button" class="option-button" style="width: 100%;" onclick="switchToInteractions()">Intéractions</button>
+      </div>
+      <div id="legend">
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #807dba;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> Fumeur
           </div>
-          <div id="legend" class="row" style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; padding: 0px 10px;">
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #807dba;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> Fumeur
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #6a51a3;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> Non fumeur
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #dd3497;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> Homme 
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #f768a1;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> Femme 
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #6baed6;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> 18-19 ans
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #4292c6;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> 20-29 ans
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #2171b5;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> 30-39 ans
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #084594;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> Plus de 40 ans
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #39853f;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> Pas d'activité physique 
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #58C750 ;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> Activité physique +10 mins 
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #d94801;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> Huile Végétale 
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #f16913;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> Zit ziton
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #fd8d3c;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> Margarine 
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #fdae6b;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div> Beurre 
-              </div>
-              <div style="display: flex ;flex-direction: row;">
-                <div
-                  style="height: 24px; width: 24px ; background-color: #fdd0a2;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
-                </div>  Autre 
-              </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #6a51a3;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> Non fumeur
           </div>
-          <div id="interactions" style="padding: 10px 10px;">
-            <div>
-              <p style="margin: 0; font-weight: bold; margin-bottom: 4px;">Filtrage</p>
-              <div>
-                <input type="checkbox" id="fumer" name="fumer" checked="true" onchange="filterVars()">
-                <label for="fumer"> Fumer </label><br>
-                <input type="checkbox" id="sexe" name="sexe" checked="true" onchange="filterVars()">
-                <label for="sexe"> Sexe </label><br>
-                <input type="checkbox" id="age" name="age" checked="true" onchange="filterVars()">
-                <label for="age"> Age </label><br>
-                <input type="checkbox" id="activite_physique" name="activite_physique" checked="true" onchange="filterVars()">
-                <label for="activite_physique"> Activité Physique </label><br>
-                <input type="checkbox" id="huile" name="huile" checked="true" onchange="filterVars()">
-                <label for="huile"> Matère grasse </label><br>
-              </div>
-              <p style="margin: 0; font-weight: bold; margin-top: 8px;">Zoom & Scroll</p>
-              <p style="margin: 0; max-width: 200px; font-size: 12px;">(Vous pouvez zoomer grâce à la souris ou avec les options suivantes, et vous pouvez scroller en glissant la souris tout en restant appuyé sur clic gauche)</p>
-              <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; margin-top: 8px;">
-                <p style="margin: 0 10px 0 0; text-decoration: underline;">Axe X</p>
-                <button style="margin-right: 5px; width: 29.2px; font-weight: bold; text-align: center; border-radius: 5px;" onclick="applyZoomXMinus()">-</button>
-                <button style="font-weight: bold; width: 29.2px; text-align: center; border-radius: 5px;" onclick="applyZoomXPlus()">+</button>
-              </div>
-              <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; margin-top: 8px;">
-                <p style="margin: 0 10px 0 0; text-decoration: underline;">Axe Y</p>
-                <button style="margin-right: 5px; width: 29.2px; font-weight: bold; text-align: center; border-radius: 5px;" onclick="applyZoomYMinus()">-</button>
-                <button style="font-weight: bold; width: 29.2px; text-align: center; border-radius: 5px;" onclick="applyZoomYPlus()">+</button>
-              </div>
-              <p style="margin: 0; font-weight: bold; margin-top: 8px;">Infos</p>
-              <p style="margin: 0; max-width: 200px; font-size: 12px;">Vous pouvez consulter des informations additionnelles sur une catégorie en pointant sur cette dernière avec la souris.</p>
-            </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #dd3497;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> Homme 
           </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #f768a1;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> Femme 
+          </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #6baed6;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> 18-19 ans
+          </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #4292c6;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> 20-29 ans
+          </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #2171b5;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> 30-39 ans
+          </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #084594;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> Plus de 40 ans
+          </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #39853f;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> Pas d'activité physique 
+          </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #58C750 ;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> Activité physique +10 mins 
+          </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #d94801;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> Huile Végétale 
+          </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #f16913;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> Zit ziton
+          </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #fd8d3c;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> Margarine 
+          </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #fdae6b;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div> Beurre 
+          </div>
+          <div style="display: flex ;flex-direction: row;">
+            <div
+              style="height: 24px; width: 24px ; background-color: #fdd0a2;margin-right: 6px;margin-bottom: 6px; margin-left: 6px; border-radius: 13px;">
+            </div>  Autre 
+          </div>
+      </div>
+      <div id="interactions">
+        <div>
+          <p style="margin: 0; font-weight: bold; margin-bottom: 4px;">Filtrage</p>
+          <div>
+            <input type="checkbox" id="fumer" name="fumer" checked="true" onchange="filterVars()">
+            <label for="fumer"> Fumer </label><br>
+            <input type="checkbox" id="sexe" name="sexe" checked="true" onchange="filterVars()">
+            <label for="sexe"> Sexe </label><br>
+            <input type="checkbox" id="age" name="age" checked="true" onchange="filterVars()">
+            <label for="age"> Age </label><br>
+            <input type="checkbox" id="activite_physique" name="activite_physique" checked="true" onchange="filterVars()">
+            <label for="activite_physique"> Activité Physique </label><br>
+            <input type="checkbox" id="huile" name="huile" checked="true" onchange="filterVars()">
+            <label for="huile"> Matère grasse </label><br>
+          </div>
+          <p style="margin: 0; font-weight: bold; margin-top: 8px;">Zoom & Scroll</p>
+          <p style="margin: 0; max-width: 200px; font-size: 12px;">(Vous pouvez zoomer grâce à la souris ou avec les options suivantes, et vous pouvez scroller en glissant la souris tout en restant appuyé sur clic gauche)</p>
+          <div style="display: flex; flex-direction: row; align-items: center; justify-content: start; margin-top: 8px;">
+            <p style="margin: 0 10px 0 0; text-decoration: underline;">Axe X</p>
+            <button style="margin-right: 5px; width: 29.2px; font-weight: bold; text-align: center; border-radius: 5px;" onclick="applyZoomXMinus()">-</button>
+            <button style="font-weight: bold; width: 29.2px; text-align: center; border-radius: 5px;" onclick="applyZoomXPlus()">+</button>
+          </div>
+          <div style="display: flex; flex-direction: row; align-items: center; justify-content: start; margin-top: 8px;">
+            <p style="margin: 0 10px 0 0; text-decoration: underline;">Axe Y</p>
+            <button style="margin-right: 5px; width: 29.2px; font-weight: bold; text-align: center; border-radius: 5px;" onclick="applyZoomYMinus()">-</button>
+            <button style="font-weight: bold; width: 29.2px; text-align: center; border-radius: 5px;" onclick="applyZoomYPlus()">+</button>
+          </div>
+          <p style="margin: 0; font-weight: bold; margin-top: 8px;">Infos</p>
+          <p style="margin: 0; max-width: 200px; font-size: 12px;">Vous pouvez consulter des informations additionnelles sur une catégorie en pointant sur cette dernière avec la souris.</p>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
   <script>
 

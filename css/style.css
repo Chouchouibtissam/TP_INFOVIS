@@ -76,19 +76,6 @@
     transform: translateY(2px);
 }
 
-#options-container{
-    max-height: 500px;
-}
-
-#legend div{
-    font-weight: 400;
-    font-size: 14px;
-}
-
-#interactions{
-    overflow-y: auto;
-}
-
 .title{
     font-family: "JetBrains Mono",monospace;
     font-size: 30px;

@@ -17,7 +17,7 @@ var colors = {
 }
 
 const height = 500
-const width = 1200
+const width = 1000
 const margin = {top : 50 , right : 50 , bottom : 50 , left : 50}
 
 var x = d3.scaleBand().domain(d3.range(data.length)).rangeRound([margin.left, width - margin.right]).paddingInner(0.3).paddingOuter(0.2)
