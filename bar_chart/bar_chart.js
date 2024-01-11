@@ -7,8 +7,8 @@ var colors = {
   "age20_age29":"#4292c6",
   "age30_age39":"#2171b5 ",
   "ageS40":"#084594",
-  "Pasdactivityphysique": "#7fcdbb",
-  "SPlus10": "#c7e9b4",
+  "Pasdactivityphysique": "#3E8E45",
+  "SPlus10": "#58C750 ",
   "Huileveg": "#d94801",
   "Zitziton": "#f16913",
   "Margarine": "#fd8d3c",
@@ -141,7 +141,7 @@ p_femme.on("mouseover", function(d , i) {
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
-  div	.html("Pourcentage des femmes pour " + i.Maladies + "<br/>"  + (i.femme * 100).toFixed(2) + "%")	
+  div	.html("Pourçentage des femmes pour " + i.Maladies + "<br/>"  + (i.femme * 100).toFixed(2) + "%")	
       .style("left", (d.pageX + 20) + "px")
       .style("top", (d.pageY - 28) + "px");
  })					
@@ -176,7 +176,7 @@ p_homme.on("mouseover", function(d , i) {
   div.transition()		
       .duration(200)		
       .style("opacity", .9);		
-  div.html("Pourcentage d'hommes pour " + i.Maladies + "<br/>"  + (i.homme * 100).toFixed(2) + "%")	
+  div.html("Pourçentage d'hommes pour " + i.Maladies + "<br/>"  + (i.homme * 100).toFixed(2) + "%")	
       .style("left", (d.pageX + 20) + "px")
       .style("top", (d.pageY - 28) + "px");
  })					
@@ -567,14 +567,14 @@ svg.append('g').attr("class", "axis").attr("class", "x-axis").call(xAxis)
 svg.append('g').attr("class", "axis").attr("class", "y-axis").call(yAxis)
 var text3 = svg.append("text")
               .style("fill", "black")
-              .style("font-size", "22px")
+              .style("font-size", "23px")
               .attr("text-anchor", "end")
               .attr("transform", `translate(${width - 20},${height}) rotate(0)`)
               .text("Maladies");
 
 var text3 = svg.append("text")
               .style("fill", "black")
-              .style("font-size", "22px")
+              .style("font-size", "23px")
               .attr("text-anchor", "end")
               .attr("transform", "translate(220 , 30) rotate(0)")
               .text("Pourcentage %");
